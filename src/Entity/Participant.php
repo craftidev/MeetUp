@@ -242,7 +242,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+
     }
 
     public function getUserIdentifier(): string
