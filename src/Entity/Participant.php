@@ -6,16 +6,21 @@ use App\Repository\ParticipantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: ParticipantRepository::class)]
-class Participant
+#[UniqueEntity(fields: ['mail'])]
+#[UniqueEntity(fields: ['pseudo'])]
+class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 180)]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
@@ -24,10 +29,10 @@ class Participant
     #[ORM\Column(length: 32, nullable: true)]
     private ?string $telephone = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 180, unique: true)]
     private ?string $mail = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 180, unique: true)]
     private ?string $pseudo = null;
 
     #[ORM\Column(length: 255)]
@@ -223,5 +228,25 @@ class Participant
         $this->campus = $campus;
 
         return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->motPasse;
+    }
+
+    public function getRoles(): array
+    {
+        return $this->administrateur ? ['ROLE_ADMIN'] : ['ROLE_USER'];
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->mail;
     }
 }
