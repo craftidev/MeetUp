@@ -14,12 +14,12 @@ class UserType extends AbstractType
     {
         $builder
             ->add('nom', type:null)
-            ->add('prenom')
-            ->add('telephone')
-            ->add('mail')
-            ->add('pseudo')
-            ->add('motPasse')
-            ->add('campus',ChoiceType::class)
+            ->add('prenom', type:null)
+            ->add('telephone', type:null)
+            ->add('mail', type:null)
+            ->add('pseudo', type:null)
+            ->add('motPasse', type:null)
+            ->add('campus')
         ;
     }
 

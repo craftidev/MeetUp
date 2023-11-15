@@ -106,4 +106,11 @@ class Campus
 
         return $this;
     }
+
+    // Register Magic Method to Print the name of the campus, see  https://ourcodeworld.com/articles/read/1460/how-to-fix-symfony-5-error-object-of-class-proxies-cg-appentity-could-not-be-converted-to-string
+    //Without that function, we cannot display Campus on a form.
+
+    public function __toString() {
+        return $this->nom;
+    }
 }
