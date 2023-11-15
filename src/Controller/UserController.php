@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,9 +18,10 @@ class UserController extends AbstractController
     }
 
     #[Route('/modifprofil', name: 'modifprofil')]
-    public function modifprofil(): Response
+    public function modifprofil(Request $request): Response
     {
-        return $this->render('user/modifprofil.html.twig', [
+
+        return $this->render('user/modifprofil.html.twig', ['userForm' => $serieForm->createView()
         ]);
     }
 }
