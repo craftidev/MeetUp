@@ -21,7 +21,7 @@ class UserController extends AbstractController
     public function modifprofil(Request $request): Response
     {
 
-        return $this->render('user/modifprofil.html.twig', ['userForm' => $serieForm->createView()
-        ]);
+        //return $this->render('user/modifprofil.html.twig', ['userForm' => $serieForm->createView()
+       //]);
     }
 }
