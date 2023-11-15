@@ -24,11 +24,22 @@ class UserController extends AbstractController
     }
 
     #[Route('/editprofil', name: 'editprofil')]
-    public function editprofil(Request $request, Security $security, EntityManagerInterface $entityManager): Response
+    public function editprofil(Request $request,
+                               Security $security,
+                               EntityManagerInterface $entityManager
+    ): Response
     {
         $user = $security->getUser();
         $form = $this->createForm(UserType::class, $user);
         $form -> handleRequest($request);
+
+        if ($form->isSubmitted()){
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash(type:'success', message:'Votre profil a été modifié avec succès');
+            return $this->redirectToRoute('user_monprofil');
+        }
 
         return $this->render('user/modifprofil.html.twig', ['userForm' => $form->createView()
        ]);
