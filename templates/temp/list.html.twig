@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+List sortie<br /><br />
+
+<table>
+    <tr>
+        <th>Nom de la sortie</th>
+        <th>Date de la sortie</th>
+        <th>Cloture</th>
+        <th>Inscrits/places</th>
+        <th>Etat</th>
+        <th>Inscrit</th>
+        <th>Organisateur</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for sortie in sorties %}
+        <tr>
+            <td>{{ sortie.nom }}<td>
+            <td>{{ sortie.dateHeureDebut }}<td>
+            <td>{{ sortie.dateLimiteInscription }}<td>
+            <td><!-- TODO num people registered -->TODO/{{ sortie.nbInscriptionsMax }}<td>
+            <td><!-- TODO fetch label -->TODO {{ sortie.etat }}<td>
+            <td><!-- TODO true/false if registered -->TODO<td>
+            <td>{{ sortie.organisateur }}<td>
+            <td><!-- TODO list action possible depending on auth -->TODO<td>
+        </tr>
+    {% endfor %}
+</table>
