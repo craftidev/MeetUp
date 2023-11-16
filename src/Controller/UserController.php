@@ -35,7 +35,6 @@ class UserController extends AbstractController
         if ($form->isSubmitted()){
             $entityManager->persist($user);
             $entityManager->flush();
-
             $this->addFlash(type:'success', message:'Votre profil a été modifié avec succès');
             return $this->redirectToRoute('user_monprofil');
         }
