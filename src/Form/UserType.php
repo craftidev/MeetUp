@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Campus;
 use App\Entity\Participant;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,7 +21,7 @@ class UserType extends AbstractType
             ->add('mail', type:null)
             ->add('pseudo', type:null)
             ->add('motPasse', type:null)
-            ->add('campus')
+            ->add('campus', EntityType::class, ['class' => Campus::class, 'choice_label' => 'nom'])
         ;
     }
 

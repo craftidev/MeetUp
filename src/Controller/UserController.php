@@ -25,11 +25,10 @@ class UserController extends AbstractController
 
     #[Route('/editprofil', name: 'editprofil')]
     public function editprofil(Request $request,
-                               Security $security,
                                EntityManagerInterface $entityManager
     ): Response
     {
-        $user = $security->getUser();
+        $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
         $form -> handleRequest($request);
 
