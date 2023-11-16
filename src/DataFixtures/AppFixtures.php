@@ -170,12 +170,12 @@ class AppFixtures extends Fixture
         $participant4->setMotPasse($hashedPassword);
         $manager->persist($participant4);
 
-        $date = new \DateTime();
-
         $sortie1 = new Sortie();
         $sortie1->setNom('sortie1');
+        $date = new \DateTime();
         $sortie1->setDateHeureDebut($date->modify('+1 week'));
         $sortie1->setDuree(90);
+        $date = new \DateTime();
         $sortie1->setDateLimiteInscription($date->modify('+3 days'));
         $sortie1->setNbInscriptionsMax(2);
         $sortie1->setInfosSortie('description of the Sortie1');
@@ -189,8 +189,10 @@ class AppFixtures extends Fixture
 
         $sortie2 = new Sortie();
         $sortie2->setNom('sortie2');
+        $date = new \DateTime();
         $sortie2->setDateHeureDebut($date->modify('+2 week'));
         $sortie2->setDuree(45);
+        $date = new \DateTime();
         $sortie2->setDateLimiteInscription($date->modify('+8 days'));
         $sortie2->setNbInscriptionsMax(3);
         $sortie2->setInfosSortie('description of the Sortie2');
