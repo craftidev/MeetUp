@@ -216,4 +216,12 @@ class Sortie
         }
         return false;
     }
+
+    public function isOrganisateur($userId): bool
+    {
+        if ($this->organisateur->getId() == $userId) {
+            return true;
+        }
+        return false;
+    }
 }
