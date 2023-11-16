@@ -2,10 +2,16 @@
 
 namespace App\Controller;
 
+use App\Form\UserType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
+
 
 #[Route('/user', name: 'user_')]
 class UserController extends AbstractController
@@ -17,11 +23,25 @@ class UserController extends AbstractController
         ]);
     }
 
-    // #[Route('/modifprofil', name: 'modifprofil')]
-    // public function modifprofil(Request $request): Response
-    // {
+    #[Route('/editprofil', name: 'editprofil')]
+    public function editprofil(Request $request,
+                               Security $security,
+                               EntityManagerInterface $entityManager
+    ): Response
+    {
+        $user = $security->getUser();
+        $form = $this->createForm(UserType::class, $user);
+        $form -> handleRequest($request);
 
-    //     //return $this->render('user/modifprofil.html.twig', ['userForm' => $serieForm->createView()
-    //    //]);
-    // }
+        if ($form->isSubmitted()){
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash(type:'success', message:'Votre profil a été modifié avec succès');
+            return $this->redirectToRoute('user_monprofil');
+        }
+
+        return $this->render('user/modifprofil.html.twig', ['userForm' => $form->createView()
+       ]);
+    }
 }
