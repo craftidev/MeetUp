@@ -30,8 +30,8 @@ class UserType extends AbstractType
                 'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options' => ['label => Mot de passe'],
-                'second_options' => ['label => Répétez le mot de passe']
+                'first_options' => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Répétez le mot de passe']
             ])
          ->getForm();
         ;
