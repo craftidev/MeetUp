@@ -30,7 +30,7 @@ class SortieController extends AbstractController
                 return $this->redirectToRoute('sortie_infos', ['id' => $sortie->getId()]);
             }
 
-        return $this->render('main/sortie.create.html.twig', [
+        return $this->render('Main/sortie.create.html.twig', [
             'sortieForm' => $sortieForm->createView()
         ]);
     }

@@ -20,13 +20,13 @@ class SortieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class)
-            ->add('dateHeureDebut', DateTimeType::class)
-            ->add('duree', IntegerType::class)
-            ->add('dateLimiteInscription', DateType::class)
-            ->add('nbInscriptionsMax', IntegerType::class)
-            ->add('infosSortie', TextareaType::class, ['required' => false]  )
-            ->add('lieu', TextType::class)
+            ->add('nom', TextType::class, ['label' => 'Nom de la sortie :'])
+            ->add('dateHeureDebut', DateTimeType::class, ['label' => 'Date et heure de la sortie :'])
+            ->add('duree', IntegerType::class, ['label' => 'Durée de la sortie en minutes :'])
+            ->add('dateLimiteInscription', DateType::class, ['label' => 'Date limite d\'inscription :'])
+            ->add('nbInscriptionsMax', IntegerType::class, ['label' => 'Nombre maximum d\'inscriptions :'])
+            ->add('infosSortie', TextareaType::class, ['required' => false, 'label' => "Informations concernant la sortie :"])
+            ->add('lieu', TextType::class,['label' => 'Lieu de la sortie :'])
         ;
     }
 
