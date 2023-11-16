@@ -25,7 +25,7 @@ class SortieType extends AbstractType
             ->add('duree', IntegerType::class)
             ->add('dateLimiteInscription', DateType::class)
             ->add('nbInscriptionsMax', IntegerType::class)
-            ->add('infosSortie', TextareaType::class,null, ['required' => false])
+            ->add('infosSortie', TextareaType::class, ['required' => false]  )
             ->add('lieu', TextType::class)
         ;
     }
