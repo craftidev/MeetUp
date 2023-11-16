@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,7 +22,7 @@ class SortieController extends AbstractController
 
         $sortieForm->handleRequest($request);
 
-            if ($sortieForm->isSubmitted()){
+            if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
                 $entityManager->persist($sortie);
                 $entityManager->flush();
 
