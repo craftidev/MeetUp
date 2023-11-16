@@ -17,7 +17,7 @@ class ListSortiesController extends AbstractController
     {
         $user = $security->getUser();
         $sorties = $sortieRepository->findBy([], ['dateHeureDebut' => 'DESC']);
-
+        
         return $this->render('temp/list.html.twig', [
             'user' => $user,
             'sorties' => $sorties

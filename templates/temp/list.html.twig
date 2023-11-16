@@ -20,9 +20,13 @@ List sortie<br /><br />
             <td>{{ sortie.nom }}</td>
             <td>{{ sortie.dateHeureDebut | date }}</td>
             <td>{{ sortie.dateLimiteInscription | date }}</td>
-            <td><!-- TODO num people registered -->TODO/{{ sortie.nbInscriptionsMax }}</td>
-            <td><!-- TODO fetch label -->TODO {{ sortie.etat.libelle }}</td>
-            <td><!-- TODO true/false if registered -->TODO</td>
+            <td>{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</td>
+            <td>{{ sortie.etat.libelle }}</td>
+            <td>
+                {% if sortie.isParticipant(user.id) %}
+                    X
+                {% endif %}
+            </td>
             <td>{{ sortie.organisateur.nom }}</td>
             <td><!-- TODO list action possible depending on auth -->TODO</td>
         </tr>
