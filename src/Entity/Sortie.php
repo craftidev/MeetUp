@@ -206,4 +206,22 @@ class Sortie
 
         return $this;
     }
+
+    public function isParticipant($userId): bool
+    {
+        foreach ($this->participants as $participant) {
+            if ($participant->getId() == $userId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function isOrganisateur($userId): bool
+    {
+        if ($this->organisateur->getId() == $userId) {
+            return true;
+        }
+        return false;
+    }
 }
