@@ -14,9 +14,8 @@
 
     <nav>
         {% block nav %}
-            <a href="{{ path('list_main') }}">Accueil</a>
-
             {% if app.user %}
+                <a href="{{ path('list_main') }}">Accueil</a>
                 <a href="{{ path('list_main') }}">Campus TODO</a>
                 <a href="{{ path('list_main') }}">Campus TODO</a>
                 <a href="{{ path('user_modifprofil') }}">Mon profil</a>
@@ -25,9 +24,11 @@
                 {% if app.user.roles[0] == 'ROLE_ADMIN' %}
                     <a href="{{ path('list_main') }}">Admin TODO</a>
                 {% endif %}
-
-            {% else %}
-                <a href="{{ path('app_login') }}">Connexion</a>
+                {% else %}
+                    La connexion est obligatoire.<br />
+                    TODO delete:<br />
+                    ADMIN -> login: a@a.a mdp: a<br />
+                    USER -> login: un@un.un mdp: un (ou deux/trois/quatre a la place de 'un') <br />
             {% endif %}
         {% endblock %}
     </nav>
