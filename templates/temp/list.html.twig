@@ -22,7 +22,11 @@ List sortie<br /><br />
             <td>{{ sortie.dateLimiteInscription | date }}</td>
             <td>{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</td>
             <td>{{ sortie.etat.libelle }}</td>
-            <td>{{ sortie.isParticipant(user.id) ? 'X' : '' }}</td>
+            <td>{{ sortie.isParticipant(user.id) ? 'X' : '' }}
+                {% for participant in sortie.participants %}
+                    <li>{{ participant.nom}} {{ participant.prenom}} </li>
+                {% endfor %}
+            </td>
             <td><!-- TODO link --><a href=''>{{ sortie.organisateur.nom }}</a></td>
             <td>
                 <!-- TODO links -->

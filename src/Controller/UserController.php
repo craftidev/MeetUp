@@ -16,12 +16,19 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 #[Route('/user', name: 'user_')]
 class UserController extends AbstractController
 {
-    #[Route('', name: 'viewprofil')]
+    #[Route('/viewprofil/{userId}', name: 'viewprofil')]
     public function viewprofil(): Response
     {
 
-
         return $this->render('user/viewprofil.html.twig', [
+        ]);
+    }
+
+    #[Route('/testlink/', name: 'testlink')]
+    public function testlink(): Response
+    {
+
+        return $this->render('temp/testlink.html.twig', [
         ]);
     }
 

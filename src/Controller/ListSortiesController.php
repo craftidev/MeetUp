@@ -15,12 +15,13 @@ class ListSortiesController extends AbstractController
     #[Route('', name: 'main')]
     public function main(Security $security, SortieRepository $sortieRepository): Response
     {
+
         $user = $security->getUser();
         $sorties = $sortieRepository->findBy([], ['dateHeureDebut' => 'DESC']);
-        
+
         return $this->render('temp/list.html.twig', [
             'user' => $user,
-            'sorties' => $sorties
+            'sorties' => $sorties,
         ]);
     }
 }
