@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<header>
+    <h1>Afficher une sortie</h1>
+</header>
+
+<main>
+
+    <section>
+        <p>Nom de la sortie : {{ sortie.nom }}</p>
+
+        <p>Date et heure de la sortie : {{ sortie.dateHeureDebut }}</p>
+
+        <p>Date limite d'inscription : {{ sortie.dateLimiteInscription }}</p>
+
+        <p>Nombre de places : {{ sortie.nbInscriptionsMax }}</p>
+
+        <p>Durée : {{ sortie.duree }}</p>
+
+        <p>Description et infos : {{ sortie.infosSortie }}</p>
+    </section>
+
+    <section>
+        <p>Campus : {{ sortie.campus }}</p>
+
+        <p>Ville : </p>
+
+        <p>Lieu : {{ sortie.lieu }}</p>
+
+        <p>Rue : </p>
+
+        <p>Code postal : </p>
+
+        <p>Latitude : </p>
+
+        <p>Longitude :</p>
+    </section>
+
+    <section>
+        <p>Liste des participants inscrits : </p>
+
+    </section>
+
+</main>
+
+<footer>
+
+</footer>
+
+</body>
+</html>

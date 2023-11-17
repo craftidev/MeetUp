@@ -6,6 +6,7 @@ use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
 use App\Repository\ParticipantRepository;
+use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +17,7 @@ class SortieController extends AbstractController
 {
 
     #[Route('/sorties/creation', name:'sortie_creation')]
-    public function creation(Request $request, EntityManagerInterface $entityManager, ParticipantRepository $participantRepository): Response
+    public function creation(Request $request, EntityManagerInterface $entityManager): Response
     {
         $sortie = new Sortie();
 
@@ -45,9 +46,15 @@ class SortieController extends AbstractController
     }
 
     #[Route('/sorties/infos/{id}', name: 'sortie_infos')]
-    public function infos_sortie(int $id): Response
+    public function infos_sortie(SortieRepository $sortieRepository, int $id): Response
     {
-        return $this->render('');
+        $sortie = $sortieRepository->find($id);
+
+
+        return $this->render('Main/sortie.afficher.html.twig', [
+            "sortie" => $sortie
+            ]
+         );
     }
 
 }
