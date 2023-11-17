@@ -13,7 +13,7 @@ body {
 nav {
     display: flex;
     gap: 0.5em;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 h1 {
