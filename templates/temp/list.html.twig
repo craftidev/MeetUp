@@ -24,25 +24,27 @@ List sortie<br /><br />
             <td>{{ sortie.etat.libelle }}</td>
             <td>{{ sortie.isParticipant(user.id) ? 'X' : '' }}</td>
             <td><!-- TODO link --><a href=''>{{ sortie.organisateur.nom }}</a></td>
-            <td>
+            <td class="td-align-left">
                 <!-- TODO links -->
-                <a href=''>Afficher </a>
+                <div class="table-links">
+                    <a href=''>Afficher</a>&nbsp;
 
-                {% if sortie.isParticipant(user.id) %}
-                    <a href=''>- Se desister 
-                {% endif %}
+                    {% if sortie.isParticipant(user.id) %}
+                        - <a href=''>Se desister</a>&nbsp;
+                    {% endif %}
 
-                {% if sortie.isOrganisateur(user.id) %}
-                    <a href=''>- Modifier </a>
-                    <a href=''>- Publier </a>
-                    <a href=''>- Annuler</a>
-                {% endif %}
+                    {% if sortie.isOrganisateur(user.id) %}
+                        - <a href=''>Modifier</a>&nbsp;
+                        - <a href=''>Publier</a>&nbsp;
+                        - <a href=''>Annuler</a>
+                    {% endif %}
 
-                (TODO links) 
+                    (TODO links) 
+                </div>
             </td>
         </tr>
     {% endfor %}
 </table>
 
-<a href="{{ path('sortie_creation') }}">Creer une sortie</a>
+<a href="{{ path('sortie_creation') }}"><button class="button-green">Creer une sortie</button></a>
 {% endblock %}
