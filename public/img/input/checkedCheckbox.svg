@@ -1,0 +1,31 @@
+<!-- Shape: checkbox (checked) -->
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" width="247.5" xmlns="http://www.w3.org/2000/svg" style="-webkit-print-color-adjust:exact" id="screenshot-c6addcb4-49ff-802c-8003-6ee66137ce3f" version="1.1" viewBox="3278.5 382 247.5 16" height="16">
+  <style data-loading="true">
+  </style>
+  <g id="shape-c6addcb4-49ff-802c-8003-6ee66137ce3f" rx="0" ry="0">
+    <g id="shape-c6addcb4-49ff-802c-8003-6ee66137ce40">
+      <g class="fills" id="fills-c6addcb4-49ff-802c-8003-6ee66137ce40">
+        <path rx="0" ry="0" d="M3294.000,384.000L3287.000,390.000L3280.000,396.000M3280.000,384.000L3287.000,390.000L3294.000,396.000">
+        </path>
+      </g>
+      <g id="strokes-c6addcb4-49ff-802c-8003-6ee66137ce40" class="strokes">
+        <g class="stroke-shape">
+          <path rx="0" ry="0" style="fill:none;fill-opacity:none;stroke-width:3;stroke:#1c5588;stroke-opacity:1;stroke-dasharray:;stroke-linecap:round" d="M3294.000,384.000L3287.000,390.000L3280.000,396.000M3280.000,384.000L3287.000,390.000L3294.000,396.000">
+          </path>
+        </g>
+      </g>
+    </g>
+    <g id="shape-c6addcb4-49ff-802c-8003-6ee66137ce41">
+      <g class="fills" id="fills-c6addcb4-49ff-802c-8003-6ee66137ce41">
+        <rect rx="6" ry="6" x="3280" y="383" transform="matrix(1.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000)" width="14" height="14">
+        </rect>
+      </g>
+      <g id="strokes-c6addcb4-49ff-802c-8003-6ee66137ce41" class="strokes">
+        <g class="stroke-shape">
+          <rect rx="6" ry="6" style="fill:none;fill-opacity:none;stroke-width:2;stroke:#1c5588;stroke-opacity:1;stroke-dasharray:" x="3280" y="383" transform="matrix(1.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000)" width="14" height="14">
+          </rect>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
