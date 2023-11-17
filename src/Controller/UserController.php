@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Participant;
+use App\Repository\ParticipantRepository;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,11 +18,17 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 #[Route('/user', name: 'user_')]
 class UserController extends AbstractController
 {
-    #[Route('/viewprofil/{userId}', name: 'viewprofil')]
-    public function viewprofil(): Response
+    #[Route('/viewprofil/{UserId}', name: 'viewprofil')]
+    public function viewprofil(Participantrepository $ParticipantRepository, $UserId): Response
     {
+        $user = $ParticipantRepository->find($UserId);
+        dd($UserId);
+        if (!$user) {
+            throw $this->createNotFoundException('Aucun utilisateur trouvé pour cet ID');
+        }
 
         return $this->render('user/viewprofil.html.twig', [
+            'userId' => $UserId,
         ]);
     }
 

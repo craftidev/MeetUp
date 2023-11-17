@@ -27,8 +27,11 @@ List sortie<br /><br />
                     <li>{{ participant.nom}} {{ participant.prenom}} </li>
                 {% endfor %}
             </td>
-            <td><!-- TODO link --><a href=''>{{ sortie.organisateur.nom }}</a></td>
-            <td>
+            {% for participant in sortie.participants %}
+                if sortie.isOrganisateur(participant)]
+            <td> <a href="{{ path('user_viewprofil', {'UserId': sortie.organisateur.id}) }}" {{ participant.nom }} </a> </td>
+            {% endfor %}
+
                 <!-- TODO links -->
                 <a href=''>Afficher </a>
 
