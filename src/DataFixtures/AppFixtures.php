@@ -6,6 +6,7 @@ use App\Entity\Campus;
 use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Participant;
+use App\Entity\Sortie;
 use App\Entity\Ville;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -168,6 +169,39 @@ class AppFixtures extends Fixture
         );
         $participant4->setMotPasse($hashedPassword);
         $manager->persist($participant4);
+
+        $sortie1 = new Sortie();
+        $sortie1->setNom('sortie1');
+        $date = new \DateTime();
+        $sortie1->setDateHeureDebut($date->modify('+1 week'));
+        $sortie1->setDuree(90);
+        $date = new \DateTime();
+        $sortie1->setDateLimiteInscription($date->modify('+3 days'));
+        $sortie1->setNbInscriptionsMax(2);
+        $sortie1->setInfosSortie('description of the Sortie1');
+        $sortie1->setOrganisateur($participant1);
+        $sortie1->addParticipant($participant1);
+        $sortie1->addParticipant($participant2);
+        $sortie1->setEtat($etatOuverte);
+        $sortie1->setCampus($campus1);
+        $sortie1->setLieu($lieu1);
+        $manager->persist($sortie1);
+
+        $sortie2 = new Sortie();
+        $sortie2->setNom('sortie2');
+        $date = new \DateTime();
+        $sortie2->setDateHeureDebut($date->modify('+2 week'));
+        $sortie2->setDuree(45);
+        $date = new \DateTime();
+        $sortie2->setDateLimiteInscription($date->modify('+8 days'));
+        $sortie2->setNbInscriptionsMax(3);
+        $sortie2->setInfosSortie('description of the Sortie2');
+        $sortie2->setOrganisateur($participant3);
+        $sortie2->addParticipant($participant3);
+        $sortie2->setEtat($etatOuverte);
+        $sortie2->setCampus($campus2);
+        $sortie2->setLieu($lieu2);
+        $manager->persist($sortie2);
 
         $manager->flush();
     }

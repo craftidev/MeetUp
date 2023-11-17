@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+List sortie<br /><br />
+
+<table border=1>
+    <tr>
+        <th>Nom de la sortie</th>
+        <th>Date de la sortie</th>
+        <th>Cloture</th>
+        <th>Inscrits/places</th>
+        <th>Etat</th>
+        <th>Inscrit</th>
+        <th>Organisateur</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for sortie in sorties %}
+        <tr>
+            <td><!-- TODO link --><a href="{{ path('sortie_infos', {'id': sortie.id}) }}">{{ sortie.nom }}</a></td>
+            <td>{{ sortie.dateHeureDebut | date }}</td>
+            <td>{{ sortie.dateLimiteInscription | date }}</td>
+            <td>{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</td>
+            <td>{{ sortie.etat.libelle }}</td>
+            <td>{{ sortie.isParticipant(user.id) ? 'X' : '' }}</td>
+            <td><!-- TODO link --><a href=''>{{ sortie.organisateur.nom }}</a></td>
+            <td>
+                <!-- TODO links -->
+                <a href=''>Afficher </a>
+
+                {% if sortie.isParticipant(user.id) %}
+                    <a href=''>- Se desister 
+                {% endif %}
+
+                {% if sortie.isOrganisateur(user.id) %}
+                    <a href=''>- Modifier </a>
+                    <a href=''>- Publier </a>
+                    <a href=''>- Annuler</a>
+                {% endif %}
+
+                (TODO links) 
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+<a href="{{ path('sortie_creation') }}">Creer une sortie</a>
+{% endblock %}
