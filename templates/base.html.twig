@@ -4,8 +4,22 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        
         {% block stylesheets %}
+            <style>
+                @font-face {
+                    font-family: DMsans;
+                    src: url({{ asset('fonts/DMsans/static/DMSans-Medium.ttf') }});
+                }
+                :root {
+                    --checkedCheckbox: url("{{ asset('img/input/checkedCheckbox.svg') }}");
+                    --uncheckedCheckbox: url("{{ asset('img/input/uncheckedCheckbox.svg') }}");
+                }
+            </style>
+
             <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/form.css') }}">
         {% endblock %}
 
         {% block javascripts %}
@@ -24,11 +38,6 @@
                 {% if app.user.roles[0] == 'ROLE_ADMIN' %}
                     <a href="{{ path('list_main') }}">Admin TODO</a>
                 {% endif %}
-                {% else %}
-                    La connexion est obligatoire.<br />
-                    TODO delete:<br />
-                    ADMIN -> login: a@a.a mdp: a<br />
-                    USER -> login: un@un.un mdp: un (ou deux/trois/quatre a la place de 'un') <br />
             {% endif %}
         {% endblock %}
     </nav>
