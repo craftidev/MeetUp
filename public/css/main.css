@@ -28,6 +28,11 @@ a {
     display: inline-block;
 }
 
+a:hover {
+    color: #7acfb0;
+    transition: color 0.3s ease;
+}
+
 button {
     padding: 10px 40px;
     border: solid 4px;
