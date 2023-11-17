@@ -26,12 +26,12 @@
         <h1>S'identifier</h1>
 
         <div class="input-group">
-            <label for="inputMail" class="big-label">Mail</label>
+            <label for="inputMail" class="big-label">Identifiant :</label>
             <input type="text" value="{{ last_username }}" name="mail" id="inputMail" class="form-control" autocomplete="username" required autofocus>
         </div>
 
         <div class="input-group">
-            <label for="inputPassword" class="big-label">Password</label>
+            <label for="inputPassword" class="big-label">Mot de passe :</label>
             <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
         </div>
 
@@ -41,18 +41,20 @@
 
             <div class="remember-forgot-group">
                 <div class="remember-me">
-                    <label>
+                    <label class="label-checkbox">
                         <input type="checkbox" id="remember_me" name="_remember_me"> Se souvenir de moi
+                        <span class="checkbox-icon"></span>
                     </label>
                 </div>
 
                 <a href="#" class="forgot-password">Mot de passe oublié</a>
             </div>
 
-
-            <button class="login-button" type="submit">
-                Connexion
-            </button>
+            <div class="button-container">
+                <button class="button-green" type="submit">
+                    Connexion
+                </button>
+            </div>
         </div>
     </form>
 </div>
