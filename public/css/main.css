@@ -37,3 +37,8 @@ button {
     transition: color 0.3s ease;
     background-color: #fefefe;
 }
+
+td {
+    text-align: center;
+    padding: 5px;
+}
