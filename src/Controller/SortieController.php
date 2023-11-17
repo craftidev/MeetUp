@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
+use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +16,11 @@ class SortieController extends AbstractController
 {
 
     #[Route('/sorties/creation', name:'sortie_creation')]
-    public function creation(Request $request, EntityManagerInterface $entityManager): Response
+    public function creation(Request $request, EntityManagerInterface $entityManager, ParticipantRepository $participantRepository): Response
     {
         $sortie = new Sortie();
+
+
         $sortieForm = $this-> createForm(SortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);
