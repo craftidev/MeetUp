@@ -12,6 +12,7 @@
 /.idea/
 # Local setup
 /docker/
+/private/
 
 ###> phpunit/phpunit ###
 /phpunit.xml
