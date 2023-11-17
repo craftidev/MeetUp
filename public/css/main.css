@@ -11,6 +11,11 @@ body {
     color: #1C5588;
 }
 
+nav {
+    display: flex;
+    gap: 0.5em;
+}
+
 h1 {
     color: #7acfb0;
     text-align: center;
