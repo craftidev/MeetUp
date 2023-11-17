@@ -1,7 +1,64 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-List sortie<br /><br />
+
+<h2 class="h2-align-right">Date du jour : {{ today | date('d / m / Y') }}</h2>
+<h2 class="h2-align-right">Participant : {{ user.prenom }} {{ user.nom | slice(0, 1) }}.</h2>
+
+<h2 class="h2-align-left">Filtrer les sorties</h2>
+
+<form class="filter-form">
+    <div class="container-filters-left">
+        <div class="input-group">
+            <label for="campus">Campus :</label>
+            <select name="campus">
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="name_search">Le nom de la sortie contient :</label>
+            <input type="text" name="name_search">
+        </div>
+
+        <div class="input-group">
+            <label for="range_start">Entre le :</label>
+            <input type="text" name="range_start">
+
+            <label for="range_end"> et le :</label>
+            <input type="text" name="range_end">
+        </div>
+    </div>
+
+    <div class="container-filters-right">
+        <label class="label-checkbox">
+            <input type="checkbox" name="i_am_organisateur">
+            Sorties dont je suis l'organisateur/trice
+            <span class="checkbox-icon"></span>
+        </label>
+        
+        <label class="label-checkbox">
+            <input type="checkbox" name="i_am_subscribed">
+            Sorties auxquelles je suis inscrit/e
+            <span class="checkbox-icon"></span>
+        </label>
+        
+        <label class="label-checkbox">
+            <input type="checkbox" name="i_am_not_subscribed">
+            Sorties auxquelles je ne suis pas inscrit/e
+            <span class="checkbox-icon"></span>
+        </label>
+        
+        <label class="label-checkbox">
+            <input type="checkbox" name="show_closed_sorties">
+            Sorties passees
+            <span class="checkbox-icon"></span>
+        </label>
+    </div>
+
+    <button type="submit" class="button-green">Rechercher</button>
+</form>
 
 <table border=1>
     <tr>
@@ -24,25 +81,27 @@ List sortie<br /><br />
             <td>{{ sortie.etat.libelle }}</td>
             <td>{{ sortie.isParticipant(user.id) ? 'X' : '' }}</td>
             <td><!-- TODO link --><a href=''>{{ sortie.organisateur.nom }}</a></td>
-            <td>
+            <td class="td-align-left">
                 <!-- TODO links -->
-                <a href=''>Afficher </a>
+                <div class="table-links">
+                    <a href=''>Afficher</a>&nbsp;
 
-                {% if sortie.isParticipant(user.id) %}
-                    <a href=''>- Se desister 
-                {% endif %}
+                    {% if sortie.isParticipant(user.id) %}
+                        - <a href=''>Se desister</a>&nbsp;
+                    {% endif %}
 
-                {% if sortie.isOrganisateur(user.id) %}
-                    <a href=''>- Modifier </a>
-                    <a href=''>- Publier </a>
-                    <a href=''>- Annuler</a>
-                {% endif %}
+                    {% if sortie.isOrganisateur(user.id) %}
+                        - <a href=''>Modifier</a>&nbsp;
+                        - <a href=''>Publier</a>&nbsp;
+                        - <a href=''>Annuler</a>
+                    {% endif %}
 
-                (TODO links) 
+                    (TODO links) 
+                </div>
             </td>
         </tr>
     {% endfor %}
 </table>
 
-<a href="{{ path('sortie_creation') }}">Creer une sortie</a>
+<a href="{{ path('sortie_creation') }}"><button class="button-blue">Creer une sortie</button></a>
 {% endblock %}

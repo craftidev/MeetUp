@@ -13,7 +13,7 @@ body {
 nav {
     display: flex;
     gap: 0.5em;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 h1 {
@@ -25,7 +25,12 @@ h1 {
 a {
     color: #1C5588;
     text-decoration: underline;
-    display: block;
+    display: inline-block;
+}
+
+a:hover {
+    color: #7acfb0;
+    transition: color 0.3s ease;
 }
 
 button {
@@ -36,4 +41,13 @@ button {
     transition: border-color 0.3s ease;
     transition: color 0.3s ease;
     background-color: #fefefe;
+}
+
+table {
+    margin-bottom: 50px;
+}
+
+td {
+    text-align: center;
+    padding: 10px;
 }
