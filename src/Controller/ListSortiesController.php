@@ -24,20 +24,18 @@ class ListSortiesController extends AbstractController
         $sortiesFilterForm = $this->createForm(SortiesFilterType::class, $filters);
         $sortiesFilterForm->handleRequest($request);
         
+        /** @var Participant $user */
         $user = $this->getUser();
-        $today = new \DateTime;
         
         if ($sortiesFilterForm->isSubmitted() && $sortiesFilterForm->isValid()) {
-
-            if ($user instanceof Participant){
-                $userId = $user->getId();
-            }
-
+            $userId = $user->getId();
+            
             $sorties = $sortieRepository->findSortiesWithFilters($filters, $userId);
         } else {
             $sorties = $sortieRepository->findBy([], ['dateHeureDebut' => 'DESC']);
         }
         
+        $today = new \DateTime;
         return $this->render('temp/list.html.twig', [
             'user' => $user,
             'sorties' => $sorties,
