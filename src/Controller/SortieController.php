@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
@@ -12,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use \Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function Symfony\Component\String\s;
 
 class SortieController extends AbstractController
 {
@@ -27,6 +29,25 @@ class SortieController extends AbstractController
         $sortieForm->handleRequest($request);
 
             if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
+
+                /** @var Participant $user */
+                $user = $this->getUser();
+                $sortie->setOrganisateur($user);
+
+                $campus = $user->getCampus();
+                $sortie->setCampus($campus);
+
+                if ($sortieForm->get('Enregistrer')->isClicked()) {
+
+                    $state = $entityManager->getRepository(Etat::class)->find(1);
+
+                } else if ($sortieForm->get('Publier_la_sortie')->isClicked()) {
+
+                    $state = $entityManager->getRepository(Etat::class)->find(2);
+                }
+
+                $sortie->setEtat($state);
+
                 $entityManager->persist($sortie);
                 $entityManager->flush();
 
@@ -78,6 +99,6 @@ class SortieController extends AbstractController
 
     }
 
-    public function annuler_sortie(Request $request, )
+    /*public function annuler_sortie(Request $request, )*/
 
 }
