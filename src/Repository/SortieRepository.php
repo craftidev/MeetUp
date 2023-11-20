@@ -21,6 +21,32 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
+    public function findSortiesWithFilters($filters)
+    {
+        // $filters['campus']
+        // $filters['name_search']
+        // $filters['range_start']
+        // $filters['range_end']
+        // $filters['i_am_organisateur']
+        // $filters['i_am_subscribed']
+        // $filters['i_am_not_subscribed']
+        // $filters['show_closed_sorties']
+
+        $queryBuilder = $this->createQueryBuilder('sorties');
+
+        if ($filters['campus'] != "all") {
+            $queryBuilder->andWhere('sorties.campus = :campus')
+            ->setParameter('campus', $filters['campus']);
+        }
+
+        if (!empty($filters['name_search'])) {
+            $queryBuilder->andWhere($queryBuilder->expr()->like('sorties.name_search', ':name_search'))
+            ->setParameter('name_search', '%' . $filters['name_search'] . '%');
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Sortie[] Returns an array of Sortie objects
 //     */

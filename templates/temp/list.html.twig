@@ -7,11 +7,12 @@
 
 <h2 class="h2-align-left">Filtrer les sorties</h2>
 
-<form class="filter-form">
+<form method="POST" class="filter-form">
     <div class="container-filters-left">
         <div class="input-group">
             <label for="campus">Campus :</label>
             <select name="campus">
+                <option value="all">Tous</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
             </select>
@@ -24,10 +25,10 @@
 
         <div class="input-group">
             <label for="range_start">Entre le :</label>
-            <input type="text" name="range_start">
+            <input type="date" name="range_start">
 
             <label for="range_end"> et le :</label>
-            <input type="text" name="range_end">
+            <input type="date" name="range_end">
         </div>
     </div>
 
