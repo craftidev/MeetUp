@@ -1,7 +1,11 @@
 <?php
 
+namespace App\DTO;
+
+use App\Entity\Campus;
+
 class SortiesFilterDTO {
-    public ?string $campus = null;
+    public ?Campus $campus = null;
     public ?string $name_search = null;
     public ?\DateTimeInterface $range_start = null;
     public ?\DateTimeInterface $range_end = null;
