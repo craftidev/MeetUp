@@ -23,15 +23,6 @@ class SortieRepository extends ServiceEntityRepository
 
     public function findSortiesWithFilters($filters, $userId)
     {
-        // $filters->campus
-        // $filters->name_search
-        // $filters->range_start
-        // $filters->range_end
-        // $filters->i_am_organisateur
-        // $filters->i_am_subscribed
-        // $filters->i_am_not_subscribed
-        // $filters->show_closed_sorties
-
         $queryBuilder = $this->createQueryBuilder('sorties');
 
         if (!empty($filters->campus)) {
