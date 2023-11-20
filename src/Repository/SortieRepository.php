@@ -21,6 +21,62 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
+    public function findSortiesWithFilters($filters, $userId)
+    {
+        $queryBuilder = $this->createQueryBuilder('sorties');
+
+        if (!empty($filters->campus)) {
+            $queryBuilder   ->andWhere(':campus = sorties.campus')
+                            ->setParameter('campus', $filters->campus);
+        }
+
+        if (!empty($filters->name_search)) {
+            $queryBuilder   ->andWhere($queryBuilder
+                                ->expr()
+                                ->like('sorties.nom', ':nom'))
+                            ->setParameter('nom', '%' . $filters->name_search . '%');
+        }
+
+        if (!empty($filters->range_start)) {
+            $queryBuilder   ->andWhere('sorties.dateHeureDebut >= :range_start')
+                            ->setParameter('range_start', $filters->range_start)
+            ;
+        }
+
+        if (!empty($filters->range_end)) {
+            $queryBuilder   ->andWhere('sorties.dateHeureDebut <= :range_end')
+                            ->setParameter('range_end', $filters->range_end)
+            ;
+        }
+
+        if ($filters->i_am_organisateur) {
+            $queryBuilder   ->andWhere(':userId = sorties.organisateur')
+                            ->setParameter('userId', $userId)
+            ;
+        }
+
+        if ($filters->i_am_subscribed) {
+            $queryBuilder   ->andWhere(':userId MEMBER OF sorties.participants')
+                            ->setParameter('userId', $userId)
+            ;
+        }
+
+        if ($filters->i_am_not_subscribed) {
+            $queryBuilder   ->andWhere(':userId NOT MEMBER OF sorties.participants')
+                            ->setParameter('userId', $userId)
+            ;
+        }
+
+        if ($filters->show_closed_sorties) {
+            $today = new \DateTime;
+            $queryBuilder   ->andWhere('sorties.dateHeureDebut >= :today')
+                            ->setParameter('today', $today)
+            ;
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Sortie[] Returns an array of Sortie objects
 //     */

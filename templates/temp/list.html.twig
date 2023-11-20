@@ -7,51 +7,49 @@
 
 <h2 class="h2-align-left">Filtrer les sorties</h2>
 
-<form class="filter-form">
+<form method="POST" class="filter-form" action="{{ path('list_main') }}">
+    {{ form_row(sortiesFilterForm._token) }}
     <div class="container-filters-left">
         <div class="input-group">
-            <label for="campus">Campus :</label>
-            <select name="campus">
-                <option value="1">1</option>
-                <option value="2">2</option>
-            </select>
+            <label for="{{ sortiesFilterForm.campus.vars.id }}">Campus :</label>
+            {{ form_widget(sortiesFilterForm.campus, {'attr': {'class': 'Campus'}}) }}
         </div>
 
         <div class="input-group">
-            <label for="name_search">Le nom de la sortie contient :</label>
-            <input type="text" name="name_search">
+            <label for="{{ sortiesFilterForm.name_search.vars.id }}">Le nom de la sortie contient :</label>
+            {{ form_widget(sortiesFilterForm.name_search) }}
         </div>
 
         <div class="input-group">
-            <label for="range_start">Entre le :</label>
-            <input type="text" name="range_start">
+            <label for="{{ sortiesFilterForm.range_start.vars.id }}">Entre le :</label>
+            {{ form_widget(sortiesFilterForm.range_start) }}
 
-            <label for="range_end"> et le :</label>
-            <input type="text" name="range_end">
+            <label for="{{ sortiesFilterForm.range_end.vars.id }}"> et le :</label>
+            {{ form_widget(sortiesFilterForm.range_end) }}
         </div>
     </div>
 
     <div class="container-filters-right">
         <label class="label-checkbox">
-            <input type="checkbox" name="i_am_organisateur">
+            {{ form_widget(sortiesFilterForm.i_am_organisateur) }}
             Sorties dont je suis l'organisateur/trice
             <span class="checkbox-icon"></span>
         </label>
         
         <label class="label-checkbox">
-            <input type="checkbox" name="i_am_subscribed">
+            {{ form_widget(sortiesFilterForm.i_am_subscribed) }}
             Sorties auxquelles je suis inscrit/e
             <span class="checkbox-icon"></span>
         </label>
         
         <label class="label-checkbox">
-            <input type="checkbox" name="i_am_not_subscribed">
+            {{ form_widget(sortiesFilterForm.i_am_not_subscribed) }}
             Sorties auxquelles je ne suis pas inscrit/e
             <span class="checkbox-icon"></span>
         </label>
         
         <label class="label-checkbox">
-            <input type="checkbox" name="show_closed_sorties">
+            {{ form_widget(sortiesFilterForm.show_closed_sorties) }}
             Sorties passees
             <span class="checkbox-icon"></span>
         </label>
