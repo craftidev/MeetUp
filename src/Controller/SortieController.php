@@ -57,4 +57,27 @@ class SortieController extends AbstractController
          );
     }
 
+    #[Route('/sorties/{id}/modifier', name: 'sortie_modifier')]
+    public function modifier_sortie(int $id, Sortie $sortie, Request $request) : Response
+    {
+        $form = $this->createForm(SortieType::class, $sortie);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+            $this->addFlash();
+
+        }
+
+        return $this->render('Main/sortie.modifier.html.twig', [
+           'form' => $form->createView()
+        ]);
+
+    }
+
+    public function annuler_sortie(Request $request, )
+
 }
