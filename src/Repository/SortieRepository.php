@@ -67,7 +67,7 @@ class SortieRepository extends ServiceEntityRepository
             ;
         }
 
-        if ($filters->show_closed_sorties) {
+        if (!$filters->show_closed_sorties) {
             $today = new \DateTime;
             $queryBuilder   ->andWhere('sorties.dateHeureDebut >= :today')
                             ->setParameter('today', $today)
