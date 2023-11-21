@@ -20,16 +20,28 @@ class SortieRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Sortie::class);
     }
-
+    
     public function findSortiesWithFilters($filters, $userId)
     {
+        $today = new \DateTime;
+        $todayMinusOneMonth = clone $today;
+        $todayMinusOneMonth->modify('-1 month');
+        
         $queryBuilder = $this->createQueryBuilder('sorties')
         //TODO joins addSelect, don't show > 1month
             ->leftJoin('sorties.campus', 'campus')
             ->leftJoin('sorties.etat', 'etat')
             ->leftJoin('sorties.participants', 'participant')
             ->addSelect('campus', 'etat', 'participant')
+            ->andWhere('sorties.dateHeureDebut >= :todayMinusOneMonth')
+            ->setParameter('todayMinusOneMonth', $todayMinusOneMonth)
         ;
+
+        if (!$filters->show_closed_sorties) {
+            $queryBuilder   ->andWhere('sorties.dateHeureDebut >= :today')
+                            ->setParameter('today', $today)
+            ;
+        }
 
         if (!empty($filters->campus)) {
             $queryBuilder   ->andWhere('campus.id = :campusId')
@@ -74,7 +86,6 @@ class SortieRepository extends ServiceEntityRepository
         }
 
         if (!$filters->show_closed_sorties) {
-            $today = new \DateTime;
             $queryBuilder   ->andWhere('sorties.dateHeureDebut >= :today')
                             ->setParameter('today', $today)
             ;
