@@ -25,14 +25,14 @@ class SortieRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('sorties')
         //TODO joins addSelect, don't show > 1month
-            ->leftJoin('sortie.campus', 'campus')
-            ->leftJoin('sortie.etat', 'etat')
-            ->leftJoin('sortie.participants', 'participant')
+            ->leftJoin('sorties.campus', 'campus')
+            ->leftJoin('sorties.etat', 'etat')
+            ->leftJoin('sorties.participants', 'participant')
             ->addSelect('campus', 'etat', 'participant')
         ;
 
         if (!empty($filters->campus)) {
-            $queryBuilder   ->andWhere(':campus = sorties.campus')
+            $queryBuilder   ->andWhere('campus.id = :campusId')
                             ->setParameter('campusId', $filters->campus->getId());
         }
 
@@ -56,7 +56,7 @@ class SortieRepository extends ServiceEntityRepository
         }
 
         if ($filters->i_am_organisateur) {
-            $queryBuilder   ->andWhere(':userId = sorties.organisateur')
+            $queryBuilder   ->andWhere('sorties.organisateur = :userId')
                             ->setParameter('userId', $userId)
             ;
         }
