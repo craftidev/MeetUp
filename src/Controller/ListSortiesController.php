@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\DTO\SortiesFilterDTO;
+use App\Entity\Participant;
+use App\Form\SortiesFilterType;
 use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,15 +16,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class ListSortiesController extends AbstractController
 {
     #[Route('', name: 'main')]
-    public function main(Security $security, SortieRepository $sortieRepository): Response
+    public function main(SortieRepository $sortieRepository, Request $request): Response
     {
+        /** @var Participant $user */
+        $user = $this->getUser();
 
-        $user = $security->getUser();
-        $sorties = $sortieRepository->findBy([], ['dateHeureDebut' => 'DESC']);
+        $filters = new SortiesFilterDTO();
+        $filters->campus = $user->getCampus();
+        $sortiesFilterForm = $this->createForm(SortiesFilterType::class, $filters);
+        $sortiesFilterForm->handleRequest($request);
+    
+        $sorties = $sortieRepository->findSortiesWithFilters($filters, $user->getId());
 
         return $this->render('temp/list.html.twig', [
             'user' => $user,
             'sorties' => $sorties,
+            'sortiesFilterForm' => $sortiesFilterForm
         ]);
     }
 }

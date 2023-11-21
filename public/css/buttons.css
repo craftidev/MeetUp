@@ -1,0 +1,23 @@
+.button-container {
+    align-self: center;
+}
+
+.button-green {
+    border-color: #7acfb0;
+    color: #7acfb0;
+}
+
+.button-green:hover {
+    border-color: #73e2b9;
+    color: #73e2b9;
+}
+
+.button-blue {
+    border-color: #1C5588;
+    color: #1C5588;
+}
+
+.button-blue:hover {
+    border-color: #347cbb;
+    color: #347cbb;
+}

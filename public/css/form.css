@@ -1,7 +1,7 @@
 input[type="text"],
 input[type="password"] {
     width: 250px;
-    padding: 10px;
+    padding: 5px;
     padding-left: 20px;
     padding-right: 20px;
     margin-top: 6;
@@ -105,18 +105,4 @@ input[type="checkbox"] {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-}
-
-.button-container {
-    align-self: center;
-}
-
-.button-green {
-    border-color: #7acfb0;
-    color: #7acfb0;
-}
-
-.button-green:hover {
-    border-color: #73e2b9;
-    color: #73e2b9;
 }
