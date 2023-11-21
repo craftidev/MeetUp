@@ -1,0 +1,36 @@
+{% extends 'base.html.twig'%}
+
+
+
+{%block body%}
+    <h1> {{userId.pseudo}}  </h1>
+        <div class="container">
+            <div class="info-item">
+                <span class="label"> Prénom :</span>
+                <label class="input-text"> {{ userId.nom }} </label>
+            </div>
+            <div class="info-item">
+                <span class="label"> Nom :</span>
+                <label class="input-text"> {{ userId.prenom }} </label>
+            </div>
+            <div class="info-item">
+                <span class="label"> Téléphone :</span>
+                <label class="input-text"> {{ userId.telephone }} </label>
+            </div>
+            <div class="info-item">
+                <span class="label"> Email :</span>
+                <label class="input-text"> {{ userId.mail }} </label>
+            </div>
+            <div class="info-item">
+                <span class="label"> Campus :</span>
+                <label class="input-text"> {{ userId.campus }} </label>
+            </div>
+        </div>
+
+    <a href="{{ referer }}" class="btn btn-secondary" style="margin-top: 20px;">Retour</a>
+
+
+{% endblock %}
+
+
+

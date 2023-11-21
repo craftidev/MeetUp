@@ -35,19 +35,19 @@
             Sorties dont je suis l'organisateur/trice
             <span class="checkbox-icon"></span>
         </label>
-        
+
         <label class="label-checkbox">
             {{ form_widget(sortiesFilterForm.i_am_subscribed) }}
             Sorties auxquelles je suis inscrit/e
             <span class="checkbox-icon"></span>
         </label>
-        
+
         <label class="label-checkbox">
             {{ form_widget(sortiesFilterForm.i_am_not_subscribed) }}
             Sorties auxquelles je ne suis pas inscrit/e
             <span class="checkbox-icon"></span>
         </label>
-        
+
         <label class="label-checkbox">
             {{ form_widget(sortiesFilterForm.show_closed_sorties) }}
             Sorties passees
@@ -78,7 +78,7 @@
             <td>{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</td>
             <td>{{ sortie.etat.libelle }}</td>
             <td>{{ sortie.isParticipant(user.id) ? 'X' : '' }}</td>
-            <td><!-- TODO link --><a href=''>{{ sortie.organisateur.nom }}</a></td>
+            <td><a href="{{ path('user_viewprofil', {'UserId': sortie.organisateur.id}) }}"> {{ sortie.organisateur.nom }} </a> </td>
             <td class="td-align-left">
                 <!-- TODO links -->
                 <div class="table-links">
@@ -94,7 +94,7 @@
                         - <a href=''>Annuler</a>
                     {% endif %}
 
-                    (TODO links) 
+                    (TODO links)
                 </div>
             </td>
         </tr>
