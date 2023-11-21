@@ -44,8 +44,8 @@ class AppFixtures extends Fixture
         $manager->persist($etatCloturee);
         
         $etatActiviteEnCours = new Etat();
-        $etatActiviteEnCours->setLibelle('Activité en
-        cours');
+        $etatActiviteEnCours
+            ->setLibelle('Activité en cours');
         $manager->persist($etatActiviteEnCours);
         
         $etatPassee = new Etat();

@@ -10,6 +10,14 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity(fields:['libelle'])]
 class Etat
 {
+
+    public const CREEE = 'Créée';
+    public const OUVERTE = 'Ouverte';
+    public const CLOTUREE = 'Clôturée';
+    public const ACTIVITE_EN_COURS = 'Activité en cours';
+    public const PASSEE = 'Passée';
+    public const ANNULEE = 'Annulée';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
