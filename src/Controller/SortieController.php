@@ -24,7 +24,6 @@ class SortieController extends AbstractController
     {
         $sortie = new Sortie();
 
-
         $sortieForm = $this-> createForm(SortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);
@@ -64,15 +63,6 @@ class SortieController extends AbstractController
                 return $this->redirectToRoute('sortie_infos', ['id' => $sortie->getId()]);
 
             }
-
-            /** @var ClickableInterface $buttonAnnuler  */
-            $buttonAnnuler = $sortieForm->get('Annuler');
-
-            if ($buttonAnnuler->isClicked()){
-
-                return $this->redirectToRoute('list_main');
-
-                }
 
 
 

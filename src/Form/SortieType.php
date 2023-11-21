@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -33,7 +34,7 @@ class SortieType extends AbstractType
             ->add('lieu', EntityType::class,['label' => 'Lieu de la sortie :', 'class' => Lieu::class] )
             ->add('Enregistrer', SubmitType::class, ['label' => 'Enregistrer la sortie'])
             ->add('Publier_la_sortie', SubmitType::class, ['label' => 'Publier la sortie'])
-            ->add('Annuler', ButtonType::class, ['label' => 'Annuler'])
+            ->add('reset', ResetType::class, ['label' => 'Annuler',])
         ;
     }
 
