@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<h2 class="h2-align-right">Date du jour : {{ today | date('d / m / Y') }}</h2>
+<h2 class="h2-align-right">Date du jour : {{ 'now' | date('d / m / Y') }}</h2>
 <h2 class="h2-align-right">Participant : {{ user.prenom }} {{ user.nom | slice(0, 1) }}.</h2>
 
 <h2 class="h2-align-left">Filtrer les sorties</h2>
