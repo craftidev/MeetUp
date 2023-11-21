@@ -19,16 +19,19 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class UserController extends AbstractController
 {
     #[Route('/viewprofil/{UserId}', name: 'viewprofil')]
-    public function viewprofil(Participantrepository $ParticipantRepository, $UserId): Response
+    public function viewprofil(Participantrepository $ParticipantRepository, $UserId, Request $request): Response
     {
+        $referer = $request->headers->get('referer');
+
         $user = $ParticipantRepository->find($UserId);
-        dd($UserId);
+
         if (!$user) {
             throw $this->createNotFoundException('Aucun utilisateur trouvé pour cet ID');
         }
 
         return $this->render('user/viewprofil.html.twig', [
-            'userId' => $UserId,
+            'userId' => $user,
+            'referer' => $referer,
         ]);
     }
 
