@@ -28,7 +28,6 @@ class SortieRepository extends ServiceEntityRepository
         $todayMinusOneMonth->modify('-1 month');
         
         $queryBuilder = $this->createQueryBuilder('sorties')
-        //TODO joins addSelect, don't show > 1month
             ->leftJoin('sorties.campus', 'campus')
             ->leftJoin('sorties.etat', 'etat')
             ->leftJoin('sorties.participants', 'participant')
