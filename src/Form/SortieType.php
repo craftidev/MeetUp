@@ -7,6 +7,7 @@ use phpDocumentor\Reflection\Type;
 use phpDocumentor\Reflection\Types\String_;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -32,6 +33,7 @@ class SortieType extends AbstractType
             ->add('lieu', EntityType::class,['label' => 'Lieu de la sortie :', 'class' => Lieu::class] )
             ->add('Enregistrer', SubmitType::class, ['label' => 'Enregistrer la sortie'])
             ->add('Publier_la_sortie', SubmitType::class, ['label' => 'Publier la sortie'])
+            ->add('Annuler', ButtonType::class, ['label' => 'Annuler'])
         ;
     }
 

@@ -10,6 +10,7 @@ use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\HttpFoundation\Request;
 use \Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,13 +38,21 @@ class SortieController extends AbstractController
                 $campus = $user->getCampus();
                 $sortie->setCampus($campus);
 
-                if ($sortieForm->get('Enregistrer')->isClicked()) {
+                /** @var ClickableInterface $buttonEnregistrer  */
 
-                    $state = $entityManager->getRepository(Etat::class)->find(1);
+                $buttonEnregistrer = $sortieForm->get('Enregistrer');
+                if($buttonEnregistrer->isClicked()){
 
-                } else if ($sortieForm->get('Publier_la_sortie')->isClicked()) {
+                    $state = $entityManager->getRepository(Etat::class)->findOneByLabel(Etat::CREEE);
 
-                    $state = $entityManager->getRepository(Etat::class)->find(2);
+                }
+
+                /** @var ClickableInterface $buttonPublier  */
+                $buttonPublier = $sortieForm->get('Publier la sortie');
+                if($buttonPublier->isClicked()){
+
+                    $state = $entityManager->getRepository(Etat::class)->findOneByLabel(Etat::OUVERTE);
+
                 }
 
                 $sortie->setEtat($state);
@@ -53,7 +62,19 @@ class SortieController extends AbstractController
 
                 $this->addFlash('success', 'Votre sortie a bien été créée');
                 return $this->redirectToRoute('sortie_infos', ['id' => $sortie->getId()]);
+
             }
+
+            /** @var ClickableInterface $buttonAnnuler  */
+            $buttonAnnuler = $sortieForm->get('Annuler');
+
+            if ($buttonAnnuler->isClicked()){
+
+                return $this->redirectToRoute('list_main');
+
+                }
+
+
 
         return $this->render('Main/sortie.create.html.twig', [
             'sortieForm' => $sortieForm->createView()
