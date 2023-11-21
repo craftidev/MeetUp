@@ -24,6 +24,7 @@ class SortieRepository extends ServiceEntityRepository
     public function findSortiesWithFilters($filters, $userId)
     {
         $queryBuilder = $this->createQueryBuilder('sorties');
+        //TODO joins addSelect, don't show > 1month
 
         if (!empty($filters->campus)) {
             $queryBuilder   ->andWhere(':campus = sorties.campus')
