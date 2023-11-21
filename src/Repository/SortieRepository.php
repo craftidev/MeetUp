@@ -23,12 +23,17 @@ class SortieRepository extends ServiceEntityRepository
 
     public function findSortiesWithFilters($filters, $userId)
     {
-        $queryBuilder = $this->createQueryBuilder('sorties');
+        $queryBuilder = $this->createQueryBuilder('sorties')
         //TODO joins addSelect, don't show > 1month
+            ->leftJoin('sortie.campus', 'campus')
+            ->leftJoin('sortie.etat', 'etat')
+            ->leftJoin('sortie.participants', 'participant')
+            ->addSelect('campus', 'etat', 'participant')
+        ;
 
         if (!empty($filters->campus)) {
             $queryBuilder   ->andWhere(':campus = sorties.campus')
-                            ->setParameter('campus', $filters->campus);
+                            ->setParameter('campusId', $filters->campus->getId());
         }
 
         if (!empty($filters->name_search)) {
