@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ form_start(sortieForm) }}
+    {{ form_start(modifierForm) }}
 
-    {{ form_widget(sortieForm) }}
+    {{ form_widget(modifierForm) }}
 
     <button>Enregistrer</button>
 
@@ -13,5 +13,5 @@
 
     <a href={{ path('') }} class="btn btn-link">Annuler</a>#}
 
-    {{ form_end(sortieForm) }}
+    {{ form_end(modifierForm) }}
 {% endblock %}

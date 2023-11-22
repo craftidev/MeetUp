@@ -89,7 +89,7 @@
                     {% endif %}
 
                     {% if sortie.isOrganisateur(user.id) %}
-                        - <a href=''>Modifier</a>&nbsp;
+                        - <a href='{{ path('sortie_modifier', {'id': sortie.id}) }}'>Modifier</a>&nbsp;
                         - <a href=''>Publier</a>&nbsp;
                         - <a href=''>Annuler</a>
                     {% endif %}

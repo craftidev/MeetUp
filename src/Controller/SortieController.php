@@ -90,22 +90,23 @@ class SortieController extends AbstractController
     }
 
     #[Route('/sorties/{id}/modifier', name: 'sortie_modifier')]
-    public function modifier_sortie(int $id, Sortie $sortie, Request $request) : Response
+    public function modifier_sortie(Request $request, EntityManagerInterface $entityManager, int $id) : Response
     {
-        $form = $this->createForm(SortieType::class, $sortie);
+        $sortie = $entityManager->getRepository(Sortie::class)->find($id);
+        $modifierForm = $this->createForm(SortieType::class, $sortie);
 
-        $form->handleRequest($request);
+        $modifierForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+        if ($modifierForm->isSubmitted() && $modifierForm->isValid()) {
+            $entityManager->persist($sortie);
             $entityManager->flush();
-
-            $this->addFlash();
+            $this->addFlash(type:'success', message:'La sortie a été modifiée avec succès');
+            return $this->redirectToRoute('list_main');
 
         }
 
         return $this->render('Main/sortie.modifier.html.twig', [
-           'form' => $form->createView()
+           'modifierForm' => $modifierForm->createView()
         ]);
 
     }
