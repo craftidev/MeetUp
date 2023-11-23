@@ -8,13 +8,14 @@ body {
     align-items: center;
     height: 100vh;
     color: #1C5588;
-}
 
+}
+/*
 nav {
     display: flex;
     gap: 0.5em;
     margin-bottom: 50px;
-}
+} */
 
 h1 {
     color: #7acfb0;

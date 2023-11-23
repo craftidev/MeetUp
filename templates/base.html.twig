@@ -20,14 +20,18 @@
             <link rel="stylesheet" href="{{ asset('css/form.css') }}">
             <link rel="stylesheet" href="{{ asset('css/buttons.css') }}">
             <link rel="stylesheet" href="{{ asset('css/list-sorties.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/monprofil.css') }}">
         {% endblock %}
 
         {% block javascripts %}
         {% endblock %}
     </head>
 
-    <nav>
+    <nav id="main-navbar">
         {% block nav %}
+            <img id="navbar-logo" src="{{asset('img/logo.png')}}" alt="Logo Sortir avec l'ENI">
+            <div id="navbar-link">
             {% if app.user %}
                 <a href="{{ path('list_main') }}">Accueil</a>
                 <a href="{{ path('list_main') }}">Campus TODO</a>
@@ -39,6 +43,7 @@
                     <a href="{{ path('admin_main') }}">Admin</a>
                 {% endif %}
             {% endif %}
+            </div>
         {% endblock %}
     </nav>
 

@@ -1,0 +1,18 @@
+#form-monprofil{
+
+
+}
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select {
+    width: 100%; /* Assure que le champ de saisie occupe toute la largeur du conteneur */
+    margin-bottom: 15px; /* Espacement entre les champs */
+}
+
+form input[type="button"] {
+    display: block; /* Permet de positionner le bouton */
+    margin-left: auto; /* Aligner le bouton à droite */
+    margin-bottom: 10px; /* Espacement en dessous du bouton */
+    /* Autres styles pour le bouton si nécessaire */
+}

@@ -1,0 +1,47 @@
+/* Réinitialisation de quelques styles par défaut */
+
+/* Style de la barre de navigation */
+#main-navbar{
+    background-color: #1C5588; /* La couleur de fond */
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px; /* Ajustez l'espacement selon vos besoins */
+    position: relative;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* Ajout de l'effet ondulé */
+#main-navbar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px; /* Hauteur de l'effet ondulé */
+    background-size: contain;
+}
+
+/* Style pour le logo */
+#navbar-logo {
+    order: -1; /* Assure que le logo reste à gauche */
+    height: 50px; /* Ou la taille de votre logo */
+    margin-left: 10px;
+}
+
+#navbar-link {
+    margin-right: 10px;
+}
+
+/* Style pour les liens */
+#main-navbar a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    margin-left: 16px; /* Espacement entre les liens */
+}
+
+#main-navbar a:hover {
+    text-decoration: underline; /* Ou un autre effet de survol */
+}
