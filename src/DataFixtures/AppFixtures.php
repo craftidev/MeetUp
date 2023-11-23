@@ -23,13 +23,13 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $campus1 = new Campus();
-        $campus1->setNom('campus1');
-        $manager->persist($campus1);
+        $campusLapins = new Campus();
+        $campusLapins->setNom('Lapins');
+        $manager->persist($campusLapins);
 
-        $campus2 = new Campus();
-        $campus2->setNom('campus2');
-        $manager->persist($campus2);
+        $campusSerpents = new Campus();
+        $campusSerpents->setNom('Serpents');
+        $manager->persist($campusSerpents);
 
         $etatCreer = new Etat();
         $etatCreer->setLibelle('Créée');
@@ -56,152 +56,172 @@ class AppFixtures extends Fixture
         $etatAnnulee->setLibelle('Annulée');
         $manager->persist($etatAnnulee);
 
-        $ville1 = new Ville();
-        $ville1->setNom('ville1');
-        $ville1->setCodePostal('00001');
-        $manager->persist($ville1);
+        $paris = new Ville();
+        $paris->setNom('Paris 7eme');
+        $paris->setCodePostal('75007');
+        $manager->persist($paris);
 
-        $ville2 = new Ville();
-        $ville2->setNom('ville2');
-        $ville2->setCodePostal('00002');
-        $manager->persist($ville2);
+        $lyon = new Ville();
+        $lyon->setNom('Lyon 6eme');
+        $lyon->setCodePostal('69006');
+        $manager->persist($lyon);
 
-        $lieu1 = new Lieu();
-        $lieu1->setNom('lieu1');
-        $lieu1->setRue('qdgh');
-        $lieu1->setVille($ville1);
-        $manager->persist($lieu1);
+        $eiffel = new Lieu();
+        $eiffel->setNom('Tour Eiffel');
+        $eiffel->setRue('Champ de Mars, 5 Av. Anatole France');
+        $eiffel->setVille($paris);
+        $manager->persist($eiffel);
 
-        $lieu2 = new Lieu();
-        $lieu2->setNom('lieu2');
-        $lieu2->setRue('fffff');
-        $lieu2->setVille($ville1);
-        $manager->persist($lieu2);
+        $tetedor = new Lieu();
+        $tetedor->setNom('Parc de la tete d\'Or');
+        $tetedor->setRue('Place Général Leclerc');
+        $tetedor->setVille($lyon);
+        $manager->persist($tetedor);
 
-        $lieu3 = new Lieu();
-        $lieu3->setNom('lieu3');
-        $lieu3->setRue('dddd');
-        $lieu3->setVille($ville2);
-        $manager->persist($lieu3);
+        $mairie = new Lieu();
+        $mairie->setNom('Mairie');
+        $mairie->setRue('58 Rue de Sèze');
+        $mairie->setVille($lyon);
+        $manager->persist($mairie);
 
-        $lieu4 = new Lieu();
-        $lieu4->setNom('lieu4');
-        $lieu4->setRue('hhhhhh');
-        $lieu4->setVille($ville2);
-        $manager->persist($lieu4);
+        $gatsby = new Lieu();
+        $gatsby->setNom('Bar Gatsby');
+        $gatsby->setRue('64 Avenue Bosquet');
+        $gatsby->setVille($paris);
+        $manager->persist($gatsby);
 
         $participantAdmin = new Participant();
-        $participantAdmin->setNom('super');
+        $participantAdmin->setNom('adminAccount');
         $participantAdmin->setPrenom('admin');
-        $participantAdmin->setTelephone('9834752345');
-        $participantAdmin->setMail('a@a.a');
-        $participantAdmin->setPseudo('a');
+        $participantAdmin->setTelephone('0000000001');
+        $participantAdmin->setMail('admin@sorties.com');
+        $participantAdmin->setPseudo('Administrateur');
         $participantAdmin->setAdministrateur(true);
         $participantAdmin->setActif(true);
-        $participantAdmin->setCampus($campus1);
+        $participantAdmin->setCampus($campusLapins);
         $hashedPassword = $this->passwordHasher->hashPassword(
             $participantAdmin,
-            'a'
+            'Administrateur'
         );
         $participantAdmin->setMotPasse($hashedPassword);
         $manager->persist($participantAdmin);
 
-        $participant1 = new Participant();
-        $participant1->setNom('participant1');
-        $participant1->setPrenom('un');
-        $participant1->setTelephone('1111752345');
-        $participant1->setMail('un@un.un');
-        $participant1->setPseudo('un');
-        $participant1->setAdministrateur(false);
-        $participant1->setActif(true);
-        $participant1->setCampus($campus1);
+        $olivia = new Participant();
+        $olivia->setNom('Serenelli-Pesin');
+        $olivia->setPrenom('Olivia');
+        $olivia->setTelephone('0611223344');
+        $olivia->setMail('olivia@sorties.com');
+        $olivia->setPseudo('Olivia');
+        $olivia->setAdministrateur(false);
+        $olivia->setActif(true);
+        $olivia->setCampus($campusLapins);
         $hashedPassword = $this->passwordHasher->hashPassword(
-            $participant1,
-            'un'
+            $olivia,
+            'Olivia'
         );
-        $participant1->setMotPasse($hashedPassword);
-        $manager->persist($participant1);
+        $olivia->setMotPasse($hashedPassword);
+        $manager->persist($olivia);
 
-        $participant2 = new Participant();
-        $participant2->setNom('participant2');
-        $participant2->setPrenom('deux');
-        $participant2->setTelephone('2222752345');
-        $participant2->setMail('deux@deux.deux');
-        $participant2->setPseudo('deux');
-        $participant2->setAdministrateur(false);
-        $participant2->setActif(true);
-        $participant2->setCampus($campus1);
+        $noemie = new Participant();
+        $noemie->setNom('Lameyse');
+        $noemie->setPrenom('Noémie');
+        $noemie->setTelephone('0711223344');
+        $noemie->setMail('noemie@sorties.com');
+        $noemie->setPseudo('Noémie');
+        $noemie->setAdministrateur(false);
+        $noemie->setActif(true);
+        $noemie->setCampus($campusLapins);
         $hashedPassword = $this->passwordHasher->hashPassword(
-            $participant2,
-            'deux'
+            $noemie,
+            'Noémie'
         );
-        $participant2->setMotPasse($hashedPassword);
-        $manager->persist($participant2);
+        $noemie->setMotPasse($hashedPassword);
+        $manager->persist($noemie);
 
-        $participant3 = new Participant();
-        $participant3->setNom('participant3');
-        $participant3->setPrenom('trois');
-        $participant3->setTelephone('3333752345');
-        $participant3->setMail('trois@trois.trois');
-        $participant3->setPseudo('trois');
-        $participant3->setAdministrateur(false);
-        $participant3->setActif(true);
-        $participant3->setCampus($campus2);
+        $ivann = new Participant();
+        $ivann->setNom('Dubois');
+        $ivann->setPrenom('Ivann');
+        $ivann->setTelephone('0311223344');
+        $ivann->setMail('ivann@sorties.com');
+        $ivann->setPseudo('Ivann');
+        $ivann->setAdministrateur(false);
+        $ivann->setActif(true);
+        $ivann->setCampus($campusSerpents);
         $hashedPassword = $this->passwordHasher->hashPassword(
-            $participant3,
-            'trois'
+            $ivann,
+            'Ivann'
         );
-        $participant3->setMotPasse($hashedPassword);
-        $manager->persist($participant3);
-
-        $participant4 = new Participant();
-        $participant4->setNom('participant3');
-        $participant4->setPrenom('quatre');
-        $participant4->setTelephone('4444752345');
-        $participant4->setMail('quatre@quatre.quatre');
-        $participant4->setPseudo('quatre');
-        $participant4->setAdministrateur(false);
-        $participant4->setActif(true);
-        $participant4->setCampus($campus2);
-        $hashedPassword = $this->passwordHasher->hashPassword(
-            $participant4,
-            'quatre'
-        );
-        $participant4->setMotPasse($hashedPassword);
-        $manager->persist($participant4);
+        $ivann->setMotPasse($hashedPassword);
+        $manager->persist($ivann);
 
         $sortie1 = new Sortie();
-        $sortie1->setNom('sortie1');
+        $sortie1->setNom('Bar Gasby');
         $date = new \DateTime();
-        $sortie1->setDateHeureDebut($date->modify('+1 week'));
+        $sortie1->setDateHeureDebut($date->modify('+1 week')->modify('-19292 seconds'));
         $sortie1->setDuree(90);
         $date = new \DateTime();
-        $sortie1->setDateLimiteInscription($date->modify('+3 days'));
-        $sortie1->setNbInscriptionsMax(2);
-        $sortie1->setInfosSortie('description of the Sortie1');
-        $sortie1->setOrganisateur($participant1);
-        $sortie1->addParticipant($participant1);
-        $sortie1->addParticipant($participant2);
+        $sortie1->setDateLimiteInscription($date->modify('+3 days')->modify('-22929 seconds'));
+        $sortie1->setNbInscriptionsMax(5);
+        $sortie1->setInfosSortie('Boire un coup dans la bonne ambiance, interdit de parler boulot.');
+        $sortie1->setOrganisateur($olivia);
+        $sortie1->addParticipant($olivia);
+        $sortie1->addParticipant($noemie);
         $sortie1->setEtat($etatOuverte);
-        $sortie1->setCampus($campus1);
-        $sortie1->setLieu($lieu1);
+        $sortie1->setCampus($campusLapins);
+        $sortie1->setLieu($gatsby);
         $manager->persist($sortie1);
 
         $sortie2 = new Sortie();
-        $sortie2->setNom('sortie2');
+        $sortie2->setNom('Fin de projet PHP');
         $date = new \DateTime();
-        $sortie2->setDateHeureDebut($date->modify('+2 week'));
+        $sortie2->setDateHeureDebut($date->modify('+1 days')->modify('-3999 seconds'));
         $sortie2->setDuree(45);
         $date = new \DateTime();
-        $sortie2->setDateLimiteInscription($date->modify('+8 days'));
+        $sortie2->setDateLimiteInscription($date->modify('-1 days')->modify('-49999 seconds'));
         $sortie2->setNbInscriptionsMax(3);
-        $sortie2->setInfosSortie('description of the Sortie2');
-        $sortie2->setOrganisateur($participant3);
-        $sortie2->addParticipant($participant3);
-        $sortie2->setEtat($etatOuverte);
-        $sortie2->setCampus($campus2);
-        $sortie2->setLieu($lieu2);
+        $sortie2->setInfosSortie('Celebration d\'un projet reussit !');
+        $sortie2->setOrganisateur($ivann);
+        $sortie2->addParticipant($ivann);
+        $sortie2->addParticipant($olivia);
+        $sortie2->addParticipant($noemie);
+        $sortie2->setEtat($etatCloturee);
+        $sortie2->setCampus($campusSerpents);
+        $sortie2->setLieu($eiffel);
         $manager->persist($sortie2);
+
+        $sortie3 = new Sortie();
+        $sortie3->setNom('Promenade le long des quais');
+        $date = new \DateTime();
+        $sortie3->setDateHeureDebut($date->modify('-10 days')->modify('-59899 seconds'));
+        $sortie3->setDuree(85);
+        $date = new \DateTime();
+        $sortie3->setDateLimiteInscription($date->modify('-11 days')->modify('-69989 seconds'));
+        $sortie3->setNbInscriptionsMax(30);
+        $sortie3->setInfosSortie('On se retrouve a la mairie.');
+        $sortie3->setOrganisateur($noemie);
+        $sortie3->addParticipant($noemie);
+        $sortie3->addParticipant($ivann);
+        $sortie3->setEtat($etatCloturee);
+        $sortie3->setCampus($campusSerpents);
+        $sortie3->setLieu($mairie);
+        $manager->persist($sortie3);
+
+        $sortie4 = new Sortie();
+        $sortie4->setNom('Sortie au zoo');
+        $date = new \DateTime();
+        $sortie4->setDateHeureDebut($date->modify('+21 days')->modify('-71919 seconds'));
+        $sortie4->setDuree(85);
+        $date = new \DateTime();
+        $sortie4->setDateLimiteInscription($date->modify('+13 days')->modify('-89191 seconds'));
+        $sortie4->setNbInscriptionsMax(9);
+        $sortie4->setInfosSortie('On peut promener nos animaux. Ne loupez pas les jardins.');
+        $sortie4->setOrganisateur($olivia);
+        $sortie4->addParticipant($noemie);
+        $sortie4->addParticipant($olivia);
+        $sortie4->setEtat($etatOuverte);
+        $sortie4->setCampus($campusLapins);
+        $sortie4->setLieu($tetedor);
+        $manager->persist($sortie4);
 
         $manager->flush();
     }
