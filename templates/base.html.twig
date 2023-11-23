@@ -36,7 +36,7 @@
                 <a href="{{ path('app_logout') }}">Se deconnecter({{ app.user.pseudo }})</a>
 
                 {% if app.user.roles[0] == 'ROLE_ADMIN' %}
-                    <a href="{{ path('list_main') }}">Admin TODO</a>
+                    <a href="{{ path('admin_uploadCsv') }}">Admin</a>
                 {% endif %}
             {% endif %}
         {% endblock %}
