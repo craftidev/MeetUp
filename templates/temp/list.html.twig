@@ -74,11 +74,11 @@
         <tr>
             <td><a href="{{ path('sortie_infos', {'id': sortie.id}) }}">{{ sortie.nom }}</a></td>
             <td>{{ sortie.dateHeureDebut | date }}</td>
-            <td>{{ sortie.dateLimiteInscription | date }}</td>
+            <td>{{ sortie.dateLimiteInscription  | date('D / m / Y') }}</td>
             <td>{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</td>
             <td>{{ sortie.etat.libelle }}</td>
             <td>{{ sortie.isParticipant(user.id) ? 'X' : '' }}</td>
-            <td><a href="{{ path('user_viewprofil', {'UserId': sortie.organisateur.id}) }}"> {{ sortie.organisateur.nom }} </a> </td>
+            <td><a href="{{ path('user_viewprofil', {'UserId': sortie.organisateur.id}) }}"> {{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom | slice(0, 1) }}. </a> </td>
             <td class="td-align-left">
                 <div class="table-links">
                     <a href='{{ path('sortie_infos', {'id': sortie.id}) }}'>Afficher</a>&nbsp;
