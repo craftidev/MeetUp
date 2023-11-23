@@ -131,10 +131,11 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->motPasse;
     }
 
-    public function setMotPasse(string $motPasse): static
+    public function setMotPasse(?string $motPasse): static
     {
-        $this->motPasse = $motPasse;
-
+        if ($motPasse !== null) {
+            $this->motPasse = $motPasse;
+        }
         return $this;
     }
 

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <p>L'ajout des utilisateurs est un succes:</p>
+
+    <table border=1px>
+        <tr>
+            <td>Nom</td>
+            <td>Prenom</td>
+            <td>Telephone</td>
+            <td>Mail</td>
+            <td>Pseudo</td>
+            <td>MotPasse</td>
+            <td>Admin</td>
+            <td>Actif</td>
+            <td>Campus</td>
+        </tr>
+
+        {% for participant in newParticipants %}
+            <tr>
+                <td>{{ participant.nom }}</td>
+                <td>{{ participant.prenom }}</td>
+                <td>{{ participant.telephone }}</td>
+                <td>{{ participant.mail }}</td>
+                <td>{{ participant.pseudo }}</td>
+                <td>{{ participant.motPasse }}</td>
+                <td>{{ participant.administrateur }}</td>
+                <td>{{ participant.actif }}</td>
+                <td>{{ participant.campus }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

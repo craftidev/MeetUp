@@ -53,11 +53,11 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form -> handleRequest($request);
 
-        if ($form->isSubmitted()){
+        if ($form->isSubmitted() && $form->isValid()){
             $entityManager->persist($user);
             $entityManager->flush();
             $this->addFlash(type:'success', message:'Votre profil a été modifié avec succès');
-            return $this->redirectToRoute('user_monprofil');
+            return $this->redirectToRoute('list_main');
         }
 
         return $this->render('user/modifprofil.html.twig', ['userForm' => $form->createView()

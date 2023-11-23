@@ -1,0 +1,2 @@
+nom,prenom,telephone,mail,pseudo,motpasse,administrateur,actif,campus
+test,csv,2525252525,testcsv@test.csv,testcsv,testcsv,false,true,campus1
