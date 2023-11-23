@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <section>
+        <p>Nom de la sortie : {{ sortie.nom }}</p>
+
+        <p>Date et heure de la sortie : {{ sortie.dateHeureDebut | date }}</p>
+
+        <p>Campus : {{ sortie.campus }}</p>
+
+        <p>Lieu : {{ sortie.lieu }}</p>
+
+        {{ form_start(modifierForm) }}
+
+        {{ form_widget(modifierForm) }}
+
+        {{ form_end(modifierForm) }}
+
+    </section>²
+
+{% endblock %}
