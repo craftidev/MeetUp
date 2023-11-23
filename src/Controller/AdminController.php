@@ -4,8 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Campus;
 use App\Entity\Participant;
+use App\Form\ParticipantType as FormParticipantType;
 use App\Form\Type\UserCsvType;
-use ArrayObject;
+use App\Form\Type\ParticipantType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,14 +17,20 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin', 'admin_')]
 class AdminController extends AbstractController
 {
-    #[Route('/uploadCsv', 'uploadCsv')]
-    public function uploadCsv(
+    #[Route('', 'main')]
+    public function main(){
+        return $this->redirectToRoute('admin_addUsers');
+    }
+
+    #[Route('/addUsers', 'addUsers')]
+    public function addUsers(
         Request $request,
         EntityManagerInterface $entityManager,
         UserPasswordHasherInterface $passwordHasher
     ): Response {
         $formCsv = $this->createForm(UserCsvType::class);
-        $formManual = $this->createForm(ParticpantType::class);
+        $manualUser = new Participant();
+        $formManual = $this->createForm(FormParticipantType::class, $manualUser);
         $formCsv->handleRequest($request);
         $formManual->handleRequest($request);
 
@@ -63,6 +70,20 @@ class AdminController extends AbstractController
             $idString = implode(',', $userIds);
 
             return $this->redirectToRoute('admin_success', ['idString' => $idString]);
+        }
+
+        if ($formManual->isSubmitted() && $formManual->isValid()) {
+            $manualUser->setActif(true);
+            $plaintextPassword = $manualUser->getMotPasse();
+            $hashedPassword = $passwordHasher->hashPassword(
+                $manualUser,
+                $plaintextPassword
+            );
+            $manualUser->setMotPasse($hashedPassword);
+            $entityManager->persist($manualUser);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_success', ['idString' => $manualUser->getId()]);
         }
 
         return $this->render('admin/add_users.html.twig', [
