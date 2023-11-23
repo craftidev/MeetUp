@@ -72,7 +72,7 @@
 
     {% for sortie in sorties %}
         <tr>
-            <td><!-- TODO link --><a href="{{ path('sortie_infos', {'id': sortie.id}) }}">{{ sortie.nom }}</a></td>
+            <td><a href="{{ path('sortie_infos', {'id': sortie.id}) }}">{{ sortie.nom }}</a></td>
             <td>{{ sortie.dateHeureDebut | date }}</td>
             <td>{{ sortie.dateLimiteInscription | date }}</td>
             <td>{{ sortie.participants | length }}/{{ sortie.nbInscriptionsMax }}</td>
@@ -80,7 +80,6 @@
             <td>{{ sortie.isParticipant(user.id) ? 'X' : '' }}</td>
             <td><a href="{{ path('user_viewprofil', {'UserId': sortie.organisateur.id}) }}"> {{ sortie.organisateur.nom }} </a> </td>
             <td class="td-align-left">
-                <!-- TODO links -->
                 <div class="table-links">
                     <a href='{{ path('sortie_infos', {'id': sortie.id}) }}'>Afficher</a>&nbsp;
 
@@ -93,11 +92,11 @@
 
                     {% if sortie.isOrganisateur(user.id) %}
                         - <a href='{{ path('sortie_modifier', {'id': sortie.id}) }}'>Modifier</a>&nbsp;
+                        {% if sortie.etat.libelle == 'Créée' %}
                         - <a href='{{ path('sortie_publication', {'id': sortie.id}) }}'>Publier</a>&nbsp;
+                        {% endif %}
                         - <a href='{{ path('sortie_annuler', {'id': sortie.id}) }}'>Annuler</a>
                     {% endif %}
-
-                    (TODO links)
                 </div>
             </td>
         </tr>
