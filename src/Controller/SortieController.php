@@ -9,7 +9,6 @@ use App\Entity\Sortie;
 use App\Entity\Ville;
 use App\Form\AnnulationSortieType;
 use App\Form\SortieType;
-use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +17,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use \Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use function Symfony\Component\String\s;
 
 class SortieController extends AbstractController
 {
@@ -32,7 +30,6 @@ class SortieController extends AbstractController
         $sortieForm->handleRequest($request);
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
-
             /** @var Participant $user */
             $user = $this->getUser();
             $sortie->setOrganisateur($user);
@@ -42,7 +39,6 @@ class SortieController extends AbstractController
             $sortie->setCampus($campus);
 
             /** @var ClickableInterface $buttonEnregistrer  */
-
             $buttonEnregistrer = $sortieForm->get('Enregistrer');
             if ($buttonEnregistrer->isClicked()) {
 
@@ -116,9 +112,7 @@ class SortieController extends AbstractController
     public function annuler_sortie(Request $request, EntityManagerInterface $entityManager, int $id): Response
     {
         $sortie = $entityManager->getRepository(Sortie::class)->find($id);
-
         $annulerForm = $this->createForm(AnnulationSortieType::class, $sortie);
-
         $annulerForm->handleRequest($request);
 
         if ($annulerForm->isSubmitted() && $annulerForm->isValid()) {
