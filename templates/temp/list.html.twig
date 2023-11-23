@@ -90,7 +90,7 @@
 
                     {% if sortie.isOrganisateur(user.id) %}
                         - <a href='{{ path('sortie_modifier', {'id': sortie.id}) }}'>Modifier</a>&nbsp;
-                        - <a href=''>Publier</a>&nbsp;
+                        - <a href='{{ path('sortie_publication', {'id': sortie.id}) }}'>Publier</a>&nbsp;
                         - <a href='{{ path('sortie_annuler', {'id': sortie.id}) }}'>Annuler</a>
                     {% endif %}
 
