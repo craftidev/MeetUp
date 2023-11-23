@@ -34,8 +34,8 @@
             <div id="navbar-link">
             {% if app.user %}
                 <a href="{{ path('list_main') }}">Accueil</a>
-                <a href="{{ path('list_main') }}">Campus TODO</a>
-                <a href="{{ path('list_main') }}">Campus TODO</a>
+                <a href="{{ path('campus_main') }}">Campus</a>
+                <a href="{{ path('ville_main') }}">Ville</a>
                 <a href="{{ path('user_modifprofil') }}">Mon profil</a>
                 <a href="{{ path('app_logout') }}">Se deconnecter({{ app.user.pseudo }})</a>
 
