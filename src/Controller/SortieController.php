@@ -123,7 +123,8 @@ class SortieController extends AbstractController
         $annulerForm->handleRequest($request);
 
         if ($annulerForm->isSubmitted() && $annulerForm->isValid()) {
-            $entityManager->persist($sortie);
+
+            $entityManager->remove($sortie);
             $entityManager->flush();
             $this->addFlash(type:'success', message:'La sortie a été annulée avec succès');
             return $this->redirectToRoute('list_main');
