@@ -3,19 +3,21 @@
 {% block body %}
     <h1>Ajouter des participants</h1>
 
-    <div>
-        <h2>Ajouter un utilisateur manuellement :</h2>
-        {{ form_start(formManual) }}
-            {{ form_widget(formManual)}}
-            <button type="submit">Ajouter</button>
-        {{ form_end(formManual) }}
-    </div>
+    <div style="display: flex; flex-direction: row; gap: 100px;">
+        <div>
+            <h2>Manuellement :</h2>
+            {{ form_start(formManual) }}
+                {{ form_widget(formManual)}}
+                <button type="submit">Ajouter</button>
+            {{ form_end(formManual) }}
+        </div>
 
-    <div>
-        <h2>Ajouter des utilisateurs avec un fichier CSV :</h2>
-        {{ form_start(formCsv) }}
-            {{ form_row(formCsv.csvFile) }}
-            <button type="submit">Upload</button>
-        {{ form_end(formCsv) }}
+        <div>
+            <h2>Fichier CSV :</h2>
+            {{ form_start(formCsv) }}
+                {{ form_row(formCsv.csvFile) }}
+                <button type="submit">Upload</button>
+            {{ form_end(formCsv) }}
+        </div>
     </div>
 {% endblock %}
