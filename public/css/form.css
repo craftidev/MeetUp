@@ -20,12 +20,13 @@ label {
     background: #fff;
     padding: 0 5px;
     color: #1C5588;
-    flex: 1;
     margin-right: 10px;
+    text-wrap: nowrap;
 }
 
 input[type="checkbox"] {
     margin-right: 5px;
+    margin-bottom: 25px;
 }
 
 .label-checkbox {
