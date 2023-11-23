@@ -27,8 +27,8 @@ class UserType extends AbstractType
             ->add('campus', EntityType::class, ['class' => Campus::class, 'choice_label' => 'nom'])
             ->add('motPasse', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'password-field']],
+                'required' => false, // Rendre ce champ optionnel
                 'first_options' => ['label' => 'Mot de passe'],
                 'second_options' => ['label' => 'Répétez le mot de passe']
             ])

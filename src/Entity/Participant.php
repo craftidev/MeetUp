@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ParticipantRepository::class)]
 #[UniqueEntity(fields: ['mail'])]
-#[UniqueEntity(fields: ['pseudo'])]
+#[UniqueEntity(fields: ['pseudo']), message: ]
 class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -131,10 +131,11 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->motPasse;
     }
 
-    public function setMotPasse(string $motPasse): static
+    public function setMotPasse(?string $motPasse): static
     {
-        $this->motPasse = $motPasse;
-
+        if ($motPasse !== null) {
+            $this->motPasse = $motPasse;
+        }
         return $this;
     }
 
