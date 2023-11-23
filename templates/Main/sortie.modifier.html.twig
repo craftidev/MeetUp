@@ -5,13 +5,7 @@
 
     {{ form_widget(modifierForm) }}
 
-    <button>Enregistrer</button>
-
-    <button>Publier la sortie</button>
-
-    {#<a href={{ path('') }} class="btn btn-link">Supprimer la sortie</a>
-
-    <a href={{ path('') }} class="btn btn-link">Annuler</a>#}
+    <a href="{{ path('sortie_annuler', {'id': sortie.id}) }}"><button class="button-blue">Supprimer la sortie</button></a>}
 
     {{ form_end(modifierForm) }}
 {% endblock %}

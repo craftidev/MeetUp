@@ -1,44 +1,22 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Annuler une sortie</title>
-</head>
-<body>
+{% extends 'base.html.twig' %}
 
-<header>
-    <h1>Annuler une sortie</h1>
-</header>
-
-<main>
+{% block body %}
 
     <section>
         <p>Nom de la sortie : {{ sortie.nom }}</p>
 
-        <p>Date et heure de la sortie : {{ sortie.dateHeureDebut }}</p>
+        <p>Date et heure de la sortie : {{ sortie.dateHeureDebut | date }}</p>
 
         <p>Campus : {{ sortie.campus }}</p>
 
         <p>Lieu : {{ sortie.lieu }}</p>
 
+        {{ form_start(modifierForm) }}
 
+        {{ form_widget(modifierForm) }}
 
-    </section>
-
-    <section>
-
-
+        {{ form_end(modifierForm) }}
 
     </section>
 
-</main>
-
-<footer>
-
-</footer>
-
-</body>
-</html>
+{% endblock %}
