@@ -5,7 +5,8 @@
 
     {{ form_widget(modifierForm) }}
 
+    {{ form_end(modifierForm) }}
+
     <a href="{{ path('sortie_annuler', {'id': sortie.id}) }}"><button class="button-blue">Supprimer la sortie</button></a>}
 
-    {{ form_end(modifierForm) }}
 {% endblock %}

@@ -32,12 +32,10 @@
         <p>Longitude :</p>
     </section>
 
-    {# <section>
-        {%  set tableauParticipants = { sortie.participants.} %}
-        <p>Liste des participants inscrits : </p>
+    <section>
         {% for participant in sortie.participants %}
-            <p>{{ sortie. }}</p>
+            <li>{{ participant.nom}} {{ participant.prenom}} </li>
         {% endfor %}
-    </section>#}
+    </section>}
 
 {% endblock %}

@@ -48,7 +48,7 @@ class SortieController extends AbstractController
                 }
 
                 /** @var ClickableInterface $buttonPublier  */
-                $buttonPublier = $sortieForm->get('Publier la sortie');
+                $buttonPublier = $sortieForm->get('Publier_la_sortie');
                 if($buttonPublier->isClicked()){
 
                     $state = $entityManager->getRepository(Etat::class)->findOneByLabel(Etat::OUVERTE);
