@@ -4,9 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Campus;
 use App\Entity\Participant;
-use App\Form\ParticipantType as FormParticipantType;
+use App\Form\ParticipantType;
 use App\Form\Type\UserCsvType;
-use App\Form\Type\ParticipantType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +29,7 @@ class AdminController extends AbstractController
     ): Response {
         $formCsv = $this->createForm(UserCsvType::class);
         $manualUser = new Participant();
-        $formManual = $this->createForm(FormParticipantType::class, $manualUser);
+        $formManual = $this->createForm(ParticipantType::class, $manualUser);
         $formCsv->handleRequest($request);
         $formManual->handleRequest($request);
 
