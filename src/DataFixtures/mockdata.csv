@@ -1,2 +1,3 @@
 nom,prenom,telephone,mail,pseudo,motpasse,administrateur,actif,campus
-test,csv,2525252525,testcsv@test.csv,testcsv,testcsv,false,true,campus1
+Doe,John,0123456789,doe@john.csv,JohnCSV,JohnCSV,false,true,Lapins
+Doe,Jane,0234456789,janedoe@mail.csv,JaneCSV,JaneCSV,false,true,Serpents
