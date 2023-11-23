@@ -7,7 +7,7 @@
 
         <p>Date et heure de la sortie : {{ sortie.dateHeureDebut | date }}</p>
 
-        <p>Date limite d'inscription : {{ sortie.dateLimiteInscription | date }}</p> }
+        <p>Date limite d'inscription : {{ sortie.dateLimiteInscription | date }}</p>
 
         <p>Nombre de places : {{ sortie.nbInscriptionsMax }}</p>
 
@@ -34,8 +34,8 @@
 
     <section>
         {% for participant in sortie.participants %}
-            <li>{{ participant.nom}} {{ participant.prenom}} </li>
+            {{ participant.nom}} {{ participant.prenom}}
         {% endfor %}
-    </section>}
+    </section>
 
 {% endblock %}

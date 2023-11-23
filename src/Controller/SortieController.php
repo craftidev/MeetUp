@@ -34,6 +34,7 @@ class SortieController extends AbstractController
                 /** @var Participant $user */
                 $user = $this->getUser();
                 $sortie->setOrganisateur($user);
+                $sortie->addParticipant($user);
 
                 $campus = $user->getCampus();
                 $sortie->setCampus($campus);
@@ -135,6 +136,24 @@ class SortieController extends AbstractController
             'modifierForm' => $annulerForm->createView(),
             'sortie' => $sortie
         ]);
+    }
+
+    #[Route('/sorties/{id}/publication', name: 'sortie_publication')]
+    public function publication(int $id, EntityManagerInterface $entityManager) : Response
+    {
+
+        $state = $entityManager->getRepository(Etat::class)->findOneByLabel(Etat::OUVERTE);
+
+        $sortie = $entityManager->getRepository(Sortie::class)->find($id);
+
+        $sortie->setEtat($state);
+
+        $entityManager->persist($sortie);
+        $entityManager->flush();
+
+        $this->addFlash(type:'success', message:'La sortie a été publiée avec succès');
+        return $this->redirectToRoute('list_main');
+
     }
 
 }
