@@ -85,8 +85,11 @@
                     <a href='{{ path('sortie_infos', {'id': sortie.id}) }}'>Afficher</a>&nbsp;
 
                     {% if sortie.isParticipant(user.id) %}
-                        - <a href=''>Se desister</a>&nbsp;
+                        - <a href='{{ path('list_sortie_desinscription', {'id': sortie.id}) }}'>Se désister</a>&nbsp;
+                    {% else %}
+                        - <a href="{{ path('list_sortie_inscription', {'id': sortie.id}) }}">S'inscrire</a>&nbsp;
                     {% endif %}
+
 
                     {% if sortie.isOrganisateur(user.id) %}
                         - <a href='{{ path('sortie_modifier', {'id': sortie.id}) }}'>Modifier</a>&nbsp;

@@ -141,7 +141,6 @@ class SortieController extends AbstractController
     #[Route('/sorties/{id}/publication', name: 'sortie_publication')]
     public function publication(int $id, EntityManagerInterface $entityManager) : Response
     {
-
         $state = $entityManager->getRepository(Etat::class)->findOneByLabel(Etat::OUVERTE);
 
         $sortie = $entityManager->getRepository(Sortie::class)->find($id);
