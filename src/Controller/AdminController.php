@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Campus;
 use App\Entity\Participant;
 use App\Form\ParticipantType;
-use App\Form\Type\UserCsvType;
+use App\Form\UserCsvType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
