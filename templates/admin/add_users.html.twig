@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ajouter des participants</h1>
+
+    <div>
+        <h2>Ajouter un utilisateur manuellement :</h2>
+        {{ form_start(formManual) }}
+            <button type="submit">Ajouter</button>
+        {{ form_end(formManual) }}
+    </div>
+
+    <div>
+        <h2>Ajouter des utilisateurs avec un fichier CSV :</h2>
+        {{ form_start(formCsv) }}
+            {{ form_row(formCsv.csvFile) }}
+            <button type="submit">Upload</button>
+        {{ form_end(formCsv) }}
+    </div>
+{% endblock %}

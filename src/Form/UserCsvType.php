@@ -13,7 +13,7 @@ class UserCsvType extends AbstractType
     {
         $builder
             ->add('csvFile', FileType::class, [
-                'label' => 'CSV file',
+                'label' => 'Fichier CSV',
                 'constraints' => [
                     new File([
                         'mimeTypes' => [

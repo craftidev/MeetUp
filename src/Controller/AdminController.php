@@ -22,11 +22,13 @@ class AdminController extends AbstractController
         EntityManagerInterface $entityManager,
         UserPasswordHasherInterface $passwordHasher
     ): Response {
-        $form = $this->createForm(UserCsvType::class);
-        $form->handleRequest($request);
+        $formCsv = $this->createForm(UserCsvType::class);
+        $formManual = $this->createForm(ParticpantType::class);
+        $formCsv->handleRequest($request);
+        $formManual->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $file = $form->get('csvFile')->getData();
+        if ($formCsv->isSubmitted() && $formCsv->isValid()) {
+            $file = $formCsv->get('csvFile')->getData();
             
             if ($file) {
                 $campusRepository = 
@@ -63,8 +65,9 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('admin_success', ['idString' => $idString]);
         }
 
-        return $this->render('admin/upload_csv.html.twig', [
-            'form' => $form->createView(),
+        return $this->render('admin/add_users.html.twig', [
+            'formCsv' => $formCsv->createView(),
+            'formManual' => $formManual->createView()
         ]);
     }
 
