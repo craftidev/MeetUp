@@ -23,52 +23,47 @@ use function Symfony\Component\String\s;
 class SortieController extends AbstractController
 {
 
-    #[Route('/sorties/creation', name:'sortie_creation')]
+    #[Route('/sorties/creation', name: 'sortie_creation')]
     public function creation(Request $request, EntityManagerInterface $entityManager): Response
     {
         $townRepository = $entityManager->getRepository(Ville::class)->findAll();
         $sortie = new Sortie();
-        $sortieForm = $this-> createForm(SortieType::class, $sortie);
+        $sortieForm = $this->createForm(SortieType::class, $sortie);
         $sortieForm->handleRequest($request);
 
-            if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
 
-                /** @var Participant $user */
-                $user = $this->getUser();
-                $sortie->setOrganisateur($user);
-                $sortie->addParticipant($user);
+            /** @var Participant $user */
+            $user = $this->getUser();
+            $sortie->setOrganisateur($user);
+            $sortie->addParticipant($user);
 
-                $campus = $user->getCampus();
-                $sortie->setCampus($campus);
+            $campus = $user->getCampus();
+            $sortie->setCampus($campus);
 
-                /** @var ClickableInterface $buttonEnregistrer  */
+            /** @var ClickableInterface $buttonEnregistrer  */
 
-                $buttonEnregistrer = $sortieForm->get('Enregistrer');
-                if($buttonEnregistrer->isClicked()){
+            $buttonEnregistrer = $sortieForm->get('Enregistrer');
+            if ($buttonEnregistrer->isClicked()) {
 
-                    $state = $entityManager->getRepository(Etat::class)->findOneByLabel(Etat::CREEE);
-
-                }
-
-                /** @var ClickableInterface $buttonPublier  */
-                $buttonPublier = $sortieForm->get('Publier_la_sortie');
-                if($buttonPublier->isClicked()){
-
-                    $state = $entityManager->getRepository(Etat::class)->findOneByLabel(Etat::OUVERTE);
-
-                }
-
-                $sortie->setEtat($state);
-
-                $entityManager->persist($sortie);
-                $entityManager->flush();
-
-                $this->addFlash('success', 'Votre sortie a bien été créée');
-                return $this->redirectToRoute('sortie_infos', ['id' => $sortie->getId()]);
-
+                $state = $entityManager->getRepository(Etat::class)->findOneByLabel(Etat::CREEE);
             }
 
+            /** @var ClickableInterface $buttonPublier  */
+            $buttonPublier = $sortieForm->get('Publier_la_sortie');
+            if ($buttonPublier->isClicked()) {
 
+                $state = $entityManager->getRepository(Etat::class)->findOneByLabel(Etat::OUVERTE);
+            }
+
+            $sortie->setEtat($state);
+
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre sortie a bien été créée');
+            return $this->redirectToRoute('sortie_infos', ['id' => $sortie->getId()]);
+        }
 
         return $this->render('Main/sortie.create.html.twig', [
             'towns' => $townRepository,
@@ -76,7 +71,7 @@ class SortieController extends AbstractController
         ]);
     }
 
-    #[Route('/sorties', name:'sortie_liste')]
+    #[Route('/sorties', name: 'sortie_liste')]
     public function lister(): Response
     {
         return $this->render('');
@@ -88,14 +83,16 @@ class SortieController extends AbstractController
         $sortie = $sortieRepository->find($id);
 
 
-        return $this->render('Main/sortie.afficher.html.twig', [
-            "sortie" => $sortie
+        return $this->render(
+            'Main/sortie.afficher.html.twig',
+            [
+                "sortie" => $sortie
             ]
         );
     }
 
     #[Route('/sorties/{id}/modifier', name: 'sortie_modifier')]
-    public function modifier_sortie(Request $request, EntityManagerInterface $entityManager, int $id) : Response
+    public function modifier_sortie(Request $request, EntityManagerInterface $entityManager, int $id): Response
     {
         $sortie = $entityManager->getRepository(Sortie::class)->find($id);
         $modifierForm = $this->createForm(SortieType::class, $sortie);
@@ -105,20 +102,18 @@ class SortieController extends AbstractController
         if ($modifierForm->isSubmitted() && $modifierForm->isValid()) {
             $entityManager->persist($sortie);
             $entityManager->flush();
-            $this->addFlash(type:'success', message:'La sortie a été modifiée avec succès');
+            $this->addFlash(type: 'success', message: 'La sortie a été modifiée avec succès');
             return $this->redirectToRoute('list_main');
-
         }
 
         return $this->render('Main/sortie.modifier.html.twig', [
             'modifierForm' => $modifierForm->createView(),
             'sortie' => $sortie
         ]);
-
     }
 
     #[Route('/sorties/{id}/annuler', name: 'sortie_annuler')]
-    public function annuler_sortie(Request $request, EntityManagerInterface $entityManager, int $id) : Response
+    public function annuler_sortie(Request $request, EntityManagerInterface $entityManager, int $id): Response
     {
         $sortie = $entityManager->getRepository(Sortie::class)->find($id);
 
@@ -130,9 +125,8 @@ class SortieController extends AbstractController
 
             $entityManager->remove($sortie);
             $entityManager->flush();
-            $this->addFlash(type:'success', message:'La sortie a été annulée avec succès');
+            $this->addFlash(type: 'success', message: 'La sortie a été annulée avec succès');
             return $this->redirectToRoute('list_main');
-
         }
 
         return $this->render('Main/sortie.supprimer.html.twig', [
@@ -142,26 +136,24 @@ class SortieController extends AbstractController
     }
 
     #[Route('/sorties/{id}/publication', name: 'sortie_publication')]
-    public function publication(int $id, EntityManagerInterface $entityManager) : Response
+    public function publication(int $id, EntityManagerInterface $entityManager): Response
     {
         $state = $entityManager->getRepository(Etat::class)->findOneByLabel(Etat::OUVERTE);
-
         $sortie = $entityManager->getRepository(Sortie::class)->find($id);
-
         $sortie->setEtat($state);
 
         $entityManager->persist($sortie);
         $entityManager->flush();
 
-        $this->addFlash(type:'success', message:'La sortie a été publiée avec succès');
+        $this->addFlash(type: 'success', message: 'La sortie a été publiée avec succès');
         return $this->redirectToRoute('list_main');
-
     }
 
     #[Route('/sorties/get-places/{id}', 'sortie_get-places')]
-    public function get_places($id, EntityManagerInterface $entityManager): JsonResponse {
+    public function get_places($id, EntityManagerInterface $entityManager): JsonResponse
+    {
         $places = $entityManager->getRepository(Lieu::class)->findBy(['ville' => $id]);
-        
+
         $placesArray = [];
         foreach ($places as $place) {
             $placesArray[] = [
