@@ -3,7 +3,40 @@
 {% block body %}
     {{ form_start(sortieForm) }}
 
+    Ville de la sortie :
+    <select id="town_select">
+        {% for town in towns %}
+            <option value="{{ town.id }}">{{ town.nom }}</option>
+        {% endfor %}
+    </select>
+
     {{ form_widget(sortieForm) }}
 
     {{ form_end(sortieForm) }}
+
+    <div id="places-dropdown" data-url="{{ path('sortie_get-places', {'id': 'PLACEHOLDER'}) }}"></div>
+
+    <script
+    src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('#town_select').change(function() {
+                var townId = $(this).val();
+                var url = $('#places-dropdown').data('url').replace('PLACEHOLDER', townId);
+                $.ajax({
+                    url: url,
+                    success: function(data) {
+                        console.log(data);
+                        var $placeSelect = $('#{{ sortieForm.lieu.vars.id }}');
+                        $placeSelect.empty();
+                        data.forEach(function(place) {
+                            $placeSelect.append($('<option></option>').attr('value', place.id).text(place.nom));
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}

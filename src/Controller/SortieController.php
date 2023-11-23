@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Etat;
+use App\Entity\Lieu;
 use App\Entity\Participant;
 use App\Entity\Sortie;
+use App\Entity\Ville;
 use App\Form\AnnulationSortieType;
 use App\Form\SortieType;
 use App\Repository\ParticipantRepository;
@@ -12,6 +14,7 @@ use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\ClickableInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use \Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,10 +26,9 @@ class SortieController extends AbstractController
     #[Route('/sorties/creation', name:'sortie_creation')]
     public function creation(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $townRepository = $entityManager->getRepository(Ville::class)->findAll();
         $sortie = new Sortie();
-
         $sortieForm = $this-> createForm(SortieType::class, $sortie);
-
         $sortieForm->handleRequest($request);
 
             if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
@@ -69,6 +71,7 @@ class SortieController extends AbstractController
 
 
         return $this->render('Main/sortie.create.html.twig', [
+            'towns' => $townRepository,
             'sortieForm' => $sortieForm->createView()
         ]);
     }
@@ -88,7 +91,7 @@ class SortieController extends AbstractController
         return $this->render('Main/sortie.afficher.html.twig', [
             "sortie" => $sortie
             ]
-         );
+        );
     }
 
     #[Route('/sorties/{id}/modifier', name: 'sortie_modifier')]
@@ -108,7 +111,7 @@ class SortieController extends AbstractController
         }
 
         return $this->render('Main/sortie.modifier.html.twig', [
-           'modifierForm' => $modifierForm->createView(),
+            'modifierForm' => $modifierForm->createView(),
             'sortie' => $sortie
         ]);
 
@@ -155,4 +158,18 @@ class SortieController extends AbstractController
 
     }
 
+    #[Route('/sorties/get-places/{id}', 'sortie_get-places')]
+    public function get_places($id, EntityManagerInterface $entityManager): JsonResponse {
+        $places = $entityManager->getRepository(Lieu::class)->findBy(['ville' => $id]);
+        
+        $placesArray = [];
+        foreach ($places as $place) {
+            $placesArray[] = [
+                'id' => $place->getId(),
+                'nom' => $place->getNom(),
+            ];
+        }
+
+        return new JsonResponse($placesArray);
+    }
 }
