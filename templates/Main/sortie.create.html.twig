@@ -1,31 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Créer une sortie</title>
-</head>
-<body>
+{% extends 'base.html.twig' %}
 
-<header>
-    <h1>Création d'une série</h1>
-</header>
-
-<main>
+{% block body %}
     {{ form_start(sortieForm) }}
 
-    {{ form_widget(serieForm) }}
-
-    <button>Créer</button>
+    {{ form_widget(sortieForm) }}
 
     {{ form_end(sortieForm) }}
-</main>
-
-<footer>
-
-</footer>
-
-</body>
-</html>
+{% endblock %}

@@ -82,16 +82,16 @@
             <td class="td-align-left">
                 <!-- TODO links -->
                 <div class="table-links">
-                    <a href=''>Afficher</a>&nbsp;
+                    <a href='{{ path('sortie_infos', {'id': sortie.id}) }}'>Afficher</a>&nbsp;
 
                     {% if sortie.isParticipant(user.id) %}
                         - <a href=''>Se desister</a>&nbsp;
                     {% endif %}
 
                     {% if sortie.isOrganisateur(user.id) %}
-                        - <a href=''>Modifier</a>&nbsp;
+                        - <a href='{{ path('sortie_modifier', {'id': sortie.id}) }}'>Modifier</a>&nbsp;
                         - <a href=''>Publier</a>&nbsp;
-                        - <a href=''>Annuler</a>
+                        - <a href='{{ path('sortie_annuler', {'id': sortie.id}) }}'>Annuler</a>
                     {% endif %}
 
                     (TODO links)
