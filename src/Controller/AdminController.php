@@ -55,7 +55,12 @@ class AdminController extends AbstractController
                 $entityManager->flush();
             }
 
-            return $this->redirectToRoute('admin_success', ['newParticipants' => $newParticipants]);
+            $userIds = array_map(function ($user) {
+                return $user->getId();
+            }, $newParticipants);
+            $idString = implode(',', $userIds);
+
+            return $this->redirectToRoute('admin_success', ['idString' => $idString]);
         }
 
         return $this->render('admin/upload_csv.html.twig', [
@@ -63,11 +68,17 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/success', 'success')]
-    public function success($newParticipants): Response
+    #[Route('/success/{idString}', 'success')]
+    public function success($idString, EntityManagerInterface $entityManager): Response
     {
+        $idArray = explode(',', $idString);
+        $newParticipantRepository = 
+            $entityManager
+            ->getRepository(Participant::class)
+            ->findBy(['id' => $idArray]);
+
         return $this->render('admin/success.html.twig', [
-            'newParticipants' => $newParticipants
+            'newParticipants' => $newParticipantRepository
         ]);
     }
 
