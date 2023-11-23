@@ -3,7 +3,68 @@
 {% block body %}
     {{ form_start(sortieForm) }}
 
-    {{ form_widget(sortieForm) }}
+        {{ form_row(sortieForm.nom) }}
+        {{ form_row(sortieForm.dateHeureDebut) }}
+        {{ form_row(sortieForm.duree) }}
+        {{ form_row(sortieForm.dateLimiteInscription) }}
+        {{ form_row(sortieForm.nbInscriptionsMax) }}
+        {{ form_row(sortieForm.infosSortie) }}
+
+        <label for="town_select">Ville de la sortie :<label>
+        <select id="town_select" name="town_select">
+                <option value=""></option>
+            {% for town in towns %}
+                <option value="{{ town.id }}">{{ town.nom }}</option>
+            {% endfor %}
+        </select>
+
+        {{ form_row(sortieForm.lieu) }}
+        {{ form_row(sortieForm.Enregistrer) }}
+        {{ form_row(sortieForm.Publier_la_sortie) }}
+        {{ form_row(sortieForm.reset) }}
 
     {{ form_end(sortieForm) }}
+
+    {# invisible, just to hold the path as variable #}
+    <div id="places-dropdown" data-url="{{ path('sortie_get-places', {'id': 'PLACEHOLDER'}) }}"></div>
+
+    <script
+    src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('#{{ sortieForm.lieu.vars.id }}')
+                .empty()
+                .append($('<option></option>')
+                .attr('value', null)
+                .text('Selectionnez une ville'));
+
+            $('#town_select').change(function() {
+                var townId = $(this).val();
+                var url = $('#places-dropdown').data('url').replace('PLACEHOLDER', townId);
+
+                if (townId) {
+                    $.ajax({
+                        url: url,
+                        success: function(data) {
+                            var $placeSelect = $('#{{ sortieForm.lieu.vars.id }}');
+                            $placeSelect.empty();
+                            data.forEach(function(place) {
+                                $placeSelect
+                                    .append($('<option></option>')
+                                    .attr('value', place.id)
+                                    .text(place.nom));
+                            });
+                        }
+                    });
+                } else {
+                    $('#{{ sortieForm.lieu.vars.id }}')
+                        .empty()
+                        .append($('<option></option>').attr('value', null)
+                        .text('Selectionnez une ville'));
+                }
+            });
+        });
+    </script>
 {% endblock %}
