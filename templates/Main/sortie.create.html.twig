@@ -78,5 +78,21 @@
             localStorage.setItem('meetupFormData', JSON.stringify(Object.fromEntries(meetupFormData)));
             window.location.href = '{{ path('lieu_main') }}';
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var storedData = localStorage.getItem('meetupFormData');
+            if (storedData) {
+                var meetupFormData = JSON.parse(storedData);
+
+                for (var key in meetupFormData) {
+                    var field = document.querySelector('[name="' + key + '"]');
+                    if (field) {
+                        field.value = meetupFormData[key];
+                    }
+                }
+
+                localStorage.removeItem('meetupFormData');
+            }
+        });
     </script>
 {% endblock %}
