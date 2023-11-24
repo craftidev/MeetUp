@@ -67,12 +67,6 @@ class SortieController extends AbstractController
         ]);
     }
 
-    #[Route('/sorties', name: 'sortie_liste')]
-    public function lister(): Response
-    {
-        return $this->render('');
-    }
-
     #[Route('/sorties/infos/{id}', name: 'sortie_infos')]
     public function infos_sortie(SortieRepository $sortieRepository, int $id): Response
     {

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ form_start(sortieForm) }}
+    {{ form_start(sortieForm, {'attr': {'id': 'meetupForm'}}) }}
 
         {{ form_row(sortieForm.nom) }}
         {{ form_row(sortieForm.dateHeureDebut) }}
@@ -20,9 +20,9 @@
 
         <div class="form-lieu-container" style="display: flex; flex-direction: row; gap: 50px; justify-content: space-between;">
             {{ form_row(sortieForm.lieu) }}
-            <button type="button" class="button-blue" style="">Ajouter un lieu</button>
+            <button type="button" id="addPlaceBtn" class="button-blue" style="">Ajouter un lieu</button>
         </div>
-        
+
         {{ form_row(sortieForm.Enregistrer) }}
         {{ form_row(sortieForm.Publier_la_sortie) }}
         {{ form_row(sortieForm.reset) }}
@@ -69,6 +69,14 @@
                         .text('Selectionnez une ville'));
                 }
             });
+        });
+
+        document.getElementById('addPlaceBtn').addEventListener('click', function() {
+            var meetupForm = document.getElementById('meetupForm');
+            var meetupFormData = new FormData(meetupForm);
+            console.log(meetupFormData);
+            localStorage.setItem('meetupFormData', JSON.stringify(Object.fromEntries(meetupFormData)));
+            window.location.href = '{{ path('lieu_main') }}';
         });
     </script>
 {% endblock %}
