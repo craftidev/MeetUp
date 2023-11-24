@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ form_start(sortieForm) }}
+    {{ form_start(sortieForm, {'attr': {'id': 'meetupForm'}}) }}
 
         {{ form_row(sortieForm.nom) }}
         {{ form_row(sortieForm.dateHeureDebut) }}
@@ -10,7 +10,7 @@
         {{ form_row(sortieForm.nbInscriptionsMax) }}
         {{ form_row(sortieForm.infosSortie) }}
 
-        <label for="town_select">Ville de la sortie :<label>
+        <label for="town_select">Ville de la sortie :</label>
         <select id="town_select" name="town_select">
                 <option value=""></option>
             {% for town in towns %}
@@ -18,7 +18,11 @@
             {% endfor %}
         </select>
 
-        {{ form_row(sortieForm.lieu) }}
+        <div class="form-lieu-container" style="display: flex; flex-direction: row; gap: 50px; justify-content: space-between;">
+            {{ form_row(sortieForm.lieu) }}
+            <button type="button" id="addPlaceBtn" class="button-blue" style="">Ajouter un lieu</button>
+        </div>
+
         {{ form_row(sortieForm.Enregistrer) }}
         {{ form_row(sortieForm.Publier_la_sortie) }}
         {{ form_row(sortieForm.reset) }}
@@ -65,6 +69,35 @@
                         .text('Selectionnez une ville'));
                 }
             });
+        });
+
+        document.getElementById('addPlaceBtn').addEventListener('click', function() {
+            var meetupForm = document.getElementById('meetupForm');
+            var meetupFormData = new FormData(meetupForm);
+            console.log(meetupFormData);
+            localStorage.setItem('meetupFormData', JSON.stringify(Object.fromEntries(meetupFormData)));
+            window.location.href = '{{ path('lieu_main') }}';
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var storedData = localStorage.getItem('meetupFormData');
+            if (storedData) {
+                var meetupFormData = JSON.parse(storedData);
+
+                for (var key in meetupFormData) {
+                    var field = document.querySelector('[name="' + key + '"]');
+                    if (field) {
+                        field.value = meetupFormData[key];
+                    }
+                }
+
+                var townSelect = document.getElementById('town_select');
+                if (townSelect) {
+                    townSelect.selectedIndex = 0;
+                }
+
+                localStorage.removeItem('meetupFormData');
+            }
         });
     </script>
 {% endblock %}
