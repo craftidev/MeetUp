@@ -19,17 +19,17 @@
     <section>
         <p>Campus : {{ sortie.campus }}</p>
 
-        <p>Ville : </p>
+        <p>Ville : {{ sortie.lieu.ville }}</p>
 
         <p>Lieu : {{ sortie.lieu }}</p>
 
-        <p>Rue : </p>
+        <p>Rue : {{ sortie.lieu.rue }}</p>
 
-        <p>Code postal : </p>
+        <p>Code postal : {{ sortie.lieu.ville.codePostal }}</p>
 
-        <p>Latitude : </p>
+        <p>Latitude : {{ sortie.lieu.latitude }}</p>
 
-        <p>Longitude :</p>
+        <p>Longitude : {{ sortie.lieu.longitude }}</p>
     </section>
 
     <section>
