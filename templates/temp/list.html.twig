@@ -90,11 +90,13 @@
                     {% endif %}
 
 
-                    {% if sortie.isOrganisateur(user.id) or user.roles[0] == 'ROLE_ADMIN' %}
+                    {% if sortie.isOrganisateur(user.id) %}
                         - <a href='{{ path('sortie_modifier', {'id': sortie.id}) }}'>Modifier</a>&nbsp;
                         {% if sortie.etat.libelle == 'Créée' %}
                         - <a href='{{ path('sortie_publication', {'id': sortie.id}) }}'>Publier</a>&nbsp;
                         {% endif %}
+                    {% endif %}
+                    {% if sortie.isOrganisateur(user.id) or user.roles[0] == 'ROLE_ADMIN' %}
                         - <a href='{{ path('sortie_annuler', {'id': sortie.id}) }}'>Annuler</a>
                     {% endif %}
                 </div>
