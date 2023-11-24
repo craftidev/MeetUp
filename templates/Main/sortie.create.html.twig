@@ -91,6 +91,11 @@
                     }
                 }
 
+                var townSelect = document.getElementById('town_select');
+                if (townSelect) {
+                    townSelect.selectedIndex = 0;
+                }
+
                 localStorage.removeItem('meetupFormData');
             }
         });
