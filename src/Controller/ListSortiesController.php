@@ -46,19 +46,24 @@ class ListSortiesController extends AbstractController
 
         $sortie = $entityManager->getRepository(Sortie::class)->find($id);
 
+        
         $dateFinInscription = $sortie->getDateLimiteInscription();
+        
+        if (count($sortie->getParticipants()) >= $sortie->getNbInscriptionsMax()) {
+            $this->addFlash(type: 'success', message: 'Desole, il n\'y a plus de place.');
+        } else {
+            if ($date>$dateFinInscription) {
+                $this->addFlash(type:'success', message:'Vous ne pouvez plus vous inscrire, la date limite d\'inscription est dépassée.');
+                return $this->redirectToRoute('list_main');
+            }
 
-        if ($date>$dateFinInscription) {
-            $this->addFlash(type:'success', message:'Vous ne pouvez plus vous inscrire, la date limite d\'inscription est dépassée.');
-            return $this->redirectToRoute('list_main');
+            $sortie->addParticipant($user);
+
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+
+            $this->addFlash(type:'success', message:'Votre inscription a été enregistrée avec succès');
         }
-
-        $sortie->addParticipant($user);
-
-        $entityManager->persist($sortie);
-        $entityManager->flush();
-
-        $this->addFlash(type:'success', message:'Votre inscription a été enregistrée avec succès');
         return $this->redirectToRoute('list_main');
 
     }
