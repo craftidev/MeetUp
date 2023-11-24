@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/lieu', name: 'lieu_')]
 class LieuController extends AbstractController
 {
-
     #[Route('', name: 'main')]
     public function main(Request $request, EntityManagerInterface $entityManager): Response
     {
